@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.TextScore;
 
-@Document(collection="bibleVerses")
+@Document(collection="religiousTexts")
 public class VerseEntity implements Comparable<VerseEntity>{
 	
 	@Id

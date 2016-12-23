@@ -1,4 +1,4 @@
-# Bible API [![Build Status](https://travis-ci.org/Holmes89/bible-api.svg?branch=mongodb)](https://travis-ci.org/Holmes89/bible-api)
+# Bible API [![Build Status](https://travis-ci.org/Holmes89/bible-api.svg?branch=mongodb)](https://travis-ci.org/Holmes89/bible-api) [![Coverage Status](https://coveralls.io/repos/github/Holmes89/bible-api/badge.svg?branch=master)](https://coveralls.io/github/Holmes89/bible-api?branch=master)
 
 This api was built to help find bible verses and search their content. 
 
