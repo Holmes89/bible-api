@@ -17,7 +17,7 @@ import com.mongodb.ServerAddress;
 @EnableMongoRepositories
 class MongoDbConfig extends AbstractMongoConfiguration {
 	
-	@Value("${db.name:sacred-texts}")
+	@Value("${db.name:bible}")
 	String database;
 	
 	@Value("${db.host:ds031845.mlab.com}")
@@ -34,14 +34,9 @@ class MongoDbConfig extends AbstractMongoConfiguration {
 		
 	@Override
 	public Mongo mongo() throws Exception {
-		MongoClient mongoClient;
-		if((userName==null)&&(password==null)){
-			mongoClient = new MongoClient(new ServerAddress(host, port));
-		}
-		else{
-			MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
-			mongoClient = new MongoClient(new ServerAddress(host, port), Arrays.asList(credential));
-		}
+		MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
+		MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), Arrays.asList(credential));
+	
 		return mongoClient;
 	}
 	

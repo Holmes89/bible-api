@@ -10,8 +10,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import io.katharsis.spring.boot.KatharsisConfigV2;
 
-@Configuration()
+@Configuration
 @Import(KatharsisConfigV2.class)
-public class SacredTextApiApplicationConfig {
+public class BibleApiApplicationConfig {
 	
 }

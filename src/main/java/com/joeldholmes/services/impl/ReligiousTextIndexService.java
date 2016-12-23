@@ -16,10 +16,7 @@ import com.joeldholmes.utils.ErrorCodes;
 @Scope("singleton")
 public class ReligiousTextIndexService implements IReligiousTextIndexService {
 	
-	private int[] quran = new int[]{7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111, 43, 52, 99, 128, 111, 110, 98, 135, 112, 78, 118, 64, 77, 227, 93, 88, 69, 60, 34, 30, 73, 54, 45, 83, 182, 88, 75, 85, 54, 53, 89, 59, 37, 35, 38, 29, 18, 45, 60, 49, 62, 55, 78, 96, 29, 22, 24, 13, 14, 11, 11, 18, 12, 12, 30, 52, 52, 44, 28, 28, 20, 56, 40, 31, 50, 40, 46, 42, 29, 19, 36, 25, 22, 17, 19, 26, 30, 20, 15, 21, 11, 8, 8, 19, 5, 8, 8, 11, 11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6};
-	private int[] tao = new int[]{4, 4, 3, 3, 2, 1, 2, 3, 2, 3, 1, 2, 3, 3, 4, 2, 2, 2, 2, 2, 1, 3, 3, 1, 4, 2, 2, 2, 2, 4, 3, 5, 2, 3, 2, 3, 3, 7, 3, 2, 3, 3, 2, 3, 2, 2, 2, 3, 3, 4, 4, 5, 3, 4, 4, 3, 3, 3, 3, 3, 4, 4, 3, 4, 3, 3, 4, 1, 2, 3, 2, 4, 2, 2, 3, 4, 4, 4, 3, 5, 3};
 	private Map<String, int[]> bible = new HashMap<String, int[]>();
-	private Map<String, Integer> quranChapterNames = new HashMap<String, Integer>();
 	
 	protected ReligiousTextIndexService(){
 		//No code, singleton, only one instance.
@@ -94,120 +91,6 @@ public class ReligiousTextIndexService implements IReligiousTextIndexService {
 		bible.put("2 kings", new int[]{18, 25, 27, 44, 27, 33, 20, 29, 37, 36, 21, 21, 25, 29, 38, 20, 41, 37, 37, 21, 26, 20, 37, 20, 30});
 		bible.put("ecclesiastes", new int[]{18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14});
 		
-		quranChapterNames.put("The Light".toLowerCase(), 24);
-		quranChapterNames.put("The Criterion".toLowerCase(), 25);
-		quranChapterNames.put("The Poets".toLowerCase(), 26);
-		quranChapterNames.put("The Ant".toLowerCase(), 27);
-		quranChapterNames.put("Ta Ha".toLowerCase(), 20);
-		quranChapterNames.put("The Prophets".toLowerCase(), 21);
-		quranChapterNames.put("The Pilgrimage".toLowerCase(), 22);
-		quranChapterNames.put("The Believers".toLowerCase(), 23);
-		quranChapterNames.put("The Narrative".toLowerCase(), 28);
-		quranChapterNames.put("The Spider".toLowerCase(), 29);
-		quranChapterNames.put("Women".toLowerCase(), 4);
-		quranChapterNames.put("The Spoils Of War".toLowerCase(), 8);
-		quranChapterNames.put("The Banishment".toLowerCase(), 59);
-		quranChapterNames.put("The Pleading One".toLowerCase(), 58);
-		quranChapterNames.put("The Beneficient".toLowerCase(), 55);
-		quranChapterNames.put("The Moon".toLowerCase(), 54);
-		quranChapterNames.put("The Iron".toLowerCase(), 57);
-		quranChapterNames.put("The Great Event".toLowerCase(), 56);
-		quranChapterNames.put("The Scatterers".toLowerCase(), 51);
-		quranChapterNames.put("Qaf".toLowerCase(), 50);
-		quranChapterNames.put("The Star".toLowerCase(), 53);
-		quranChapterNames.put("The Mountain".toLowerCase(), 52);
-		quranChapterNames.put("The Men".toLowerCase(), 114);
-		quranChapterNames.put("The Overwhelming".toLowerCase(), 88);
-		quranChapterNames.put("The Daybreak".toLowerCase(), 89);
-		quranChapterNames.put("The Flame".toLowerCase().toLowerCase(), 111);
-		quranChapterNames.put("The Help".toLowerCase(), 110);
-		quranChapterNames.put("The Dawn".toLowerCase(), 113);
-		quranChapterNames.put("The Unity".toLowerCase(), 112);
-		quranChapterNames.put("The Cleaving Asund".toLowerCase(), 82);
-		quranChapterNames.put("The Defrauders".toLowerCase(), 83);
-		quranChapterNames.put("He Frowned".toLowerCase(), 80);
-		quranChapterNames.put("The Covering Up".toLowerCase(), 81);
-		quranChapterNames.put("The Night-Comer".toLowerCase(), 86);
-		quranChapterNames.put("The Most High".toLowerCase(), 87);
-		quranChapterNames.put("The Bursting Asund".toLowerCase(), 84);
-		quranChapterNames.put("The Mansions Of The Stars".toLowerCase(), 85);
-		quranChapterNames.put("The Family Of Imran".toLowerCase(), 3);
-		quranChapterNames.put("The Elevated Place".toLowerCase(), 7);
-		quranChapterNames.put("The Heavenly Fount".toLowerCase(), 108);
-		quranChapterNames.put("The Unbelievers".toLowerCase(), 109);
-		quranChapterNames.put("The Multiplicatio".toLowerCase(), 102);
-		quranChapterNames.put("Time".toLowerCase(), 103);
-		quranChapterNames.put("The Assaulters".toLowerCase(), 100);
-		quranChapterNames.put("The Terrible Calam".toLowerCase(), 101);
-		quranChapterNames.put("The Qureaish".toLowerCase(), 106);
-		quranChapterNames.put("The Daily Necessar".toLowerCase(), 107);
-		quranChapterNames.put("The Slanderer".toLowerCase(), 104);
-		quranChapterNames.put("The Elephant".toLowerCase(), 105);
-		quranChapterNames.put("The Companies".toLowerCase(), 39);
-		quranChapterNames.put("Suad".toLowerCase(), 38);
-		quranChapterNames.put("The Allies".toLowerCase(), 33);
-		quranChapterNames.put("The Adoration".toLowerCase(), 32);
-		quranChapterNames.put("Luqman".toLowerCase(), 31);
-		quranChapterNames.put("The Romans".toLowerCase(), 30);
-		quranChapterNames.put("The Rangers".toLowerCase(), 37);
-		quranChapterNames.put("Ya Seen".toLowerCase(), 36);
-		quranChapterNames.put("The Originator".toLowerCase(), 35);
-		quranChapterNames.put("Saba".toLowerCase(), 34);
-		quranChapterNames.put("The Examined One".toLowerCase(), 60);
-		quranChapterNames.put("The Ranks".toLowerCase(), 61);
-		quranChapterNames.put("Friday".toLowerCase(), 62);
-		quranChapterNames.put("The Hypocrites".toLowerCase(), 63);
-		quranChapterNames.put("Loss And Gain".toLowerCase(), 64);
-		quranChapterNames.put("The Divorce".toLowerCase(), 65);
-		quranChapterNames.put("The Prohibition".toLowerCase(), 66);
-		quranChapterNames.put("The Kingdom".toLowerCase(), 67);
-		quranChapterNames.put("The Pen".toLowerCase(), 68);
-		quranChapterNames.put("The Sure Calamity".toLowerCase(), 69);
-		quranChapterNames.put("The Cow".toLowerCase(), 2);
-		quranChapterNames.put("The Cattle".toLowerCase(), 6);
-		quranChapterNames.put("The Shaking".toLowerCase(), 99);
-		quranChapterNames.put("The Clear Evidence".toLowerCase(), 98);
-		quranChapterNames.put("The Sun".toLowerCase(), 91);
-		quranChapterNames.put("The City".toLowerCase(), 90);
-		quranChapterNames.put("The Early Hours".toLowerCase(), 93);
-		quranChapterNames.put("The Night".toLowerCase(), 92);
-		quranChapterNames.put("The Fig".toLowerCase(), 95);
-		quranChapterNames.put("The Expansion".toLowerCase(), 94);
-		quranChapterNames.put("The Majesty".toLowerCase(), 97);
-		quranChapterNames.put("The Clot".toLowerCase(), 96);
-		quranChapterNames.put("Hud".toLowerCase(), 11);
-		quranChapterNames.put("Yunus".toLowerCase(), 10);
-		quranChapterNames.put("The Thunder".toLowerCase(), 13);
-		quranChapterNames.put("Yusuf".toLowerCase(), 12);
-		quranChapterNames.put("The Rock".toLowerCase(), 15);
-		quranChapterNames.put("Ibrahim".toLowerCase(), 14);
-		quranChapterNames.put("The Israelites".toLowerCase(), 17);
-		quranChapterNames.put("The Bee".toLowerCase(), 16);
-		quranChapterNames.put("Marium".toLowerCase(), 19);
-		quranChapterNames.put("The Cave".toLowerCase(), 18);
-		quranChapterNames.put("The Victory".toLowerCase(), 48);
-		quranChapterNames.put("The Chambers".toLowerCase(), 49);
-		quranChapterNames.put("The Sandhills".toLowerCase(), 46);
-		quranChapterNames.put("Muhammad".toLowerCase(), 47);
-		quranChapterNames.put("The Evident Smoke".toLowerCase(), 44);
-		quranChapterNames.put("The Kneeling".toLowerCase(), 45);
-		quranChapterNames.put("The Counsel".toLowerCase(), 42);
-		quranChapterNames.put("The Embellishment".toLowerCase(), 43);
-		quranChapterNames.put("The Believer".toLowerCase(), 40);
-		quranChapterNames.put("Ha Mim".toLowerCase(), 41);
-		quranChapterNames.put("The Opening".toLowerCase(), 1);
-		quranChapterNames.put("The Food".toLowerCase(), 5);
-		quranChapterNames.put("Repentance".toLowerCase(), 9);
-		quranChapterNames.put("The Emissaries".toLowerCase(), 77);
-		quranChapterNames.put("The Man".toLowerCase(), 76);
-		quranChapterNames.put("The Resurrection".toLowerCase(), 75);
-		quranChapterNames.put("The Clothe Done".toLowerCase(), 74);
-		quranChapterNames.put("The Wrapped Up".toLowerCase(), 73);
-		quranChapterNames.put("The Jinn".toLowerCase(), 72);
-		quranChapterNames.put("Nuh".toLowerCase(), 71);
-		quranChapterNames.put("The Ways Of Ascent".toLowerCase(), 70);
-		quranChapterNames.put("Those Who Pull Out".toLowerCase(), 79);
-		quranChapterNames.put("The Great Event".toLowerCase(), 78);
 	}
 
 	@Override
@@ -249,55 +132,6 @@ public class ReligiousTextIndexService implements IReligiousTextIndexService {
 		}
 	}
 
-	@Override
-	public int maxQuranChapters(){
-		return quran.length;
-	}
-
-	@Override
-	public int maxQuranChapterVerses(int chapter) throws ServiceException {
-		if(chapter<1){
-			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter must be greater than 0");
-		}
-		chapter -=1;
-		if(chapter<quran.length){
-			return quran[chapter];
-		}
-		else{
-			return 0;
-		}
-	}
-
-	@Override
-	public int maxTaoChapters() throws ServiceException {
-		return tao.length;
-	}
-
-	@Override
-	public int maxTaoChapterVerses(int chapter) throws ServiceException {
-		if(chapter<1){
-			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter must be greater than 0");
-		}
-		chapter -=1;
-		if(chapter<tao.length){
-			return tao[chapter];
-		}
-		else{
-			return 0;
-		}
-	}
-	
-	@Override
-	public int quranChapterNameLookup(String name) throws ServiceException {
-		if(name == null || name.isEmpty()){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter name must not be null");
-		}
-		Integer chapter = quranChapterNames.get(name.toLowerCase());
-		if(chapter == null){
-			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Invalid Chapter Name");
-		}
-		return chapter.intValue();
-	}
 	
 	
 

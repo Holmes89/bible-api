@@ -25,11 +25,11 @@ import io.katharsis.resource.registry.ResourceRegistry;
 @EnableMongoRepositories("com.joeldholmes.repository")
 @EnableCircuitBreaker
 @RestController
-public class SacredTextApiApplication {
+public class BibleApiApplication {
 
 	public static void main(String[] args) {
 
-		ApplicationContext ctx =SpringApplication.run(SacredTextApiApplication.class, args);
+		SpringApplication.run(BibleApiApplication.class, args);
 
 	}
 

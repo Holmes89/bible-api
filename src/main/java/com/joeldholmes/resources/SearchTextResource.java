@@ -7,7 +7,7 @@ import com.joeldholmes.entity.VerseEntity;
 import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
-@JsonApiResource(type="search-text-results")
+@JsonApiResource(type="search-results")
 public class SearchTextResource{
 	
 	@JsonApiId

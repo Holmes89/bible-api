@@ -1,6 +1,10 @@
-# Sacred Text API [![Build Status](https://travis-ci.org/Holmes89/sacred-text-api.svg?branch=mongodb)](https://travis-ci.org/Holmes89/sacred-text-api)
+# Bible API [![Build Status](https://travis-ci.org/Holmes89/bible-api.svg?branch=mongodb)](https://travis-ci.org/Holmes89/bible-api)
 
-This README outlines basic usage and details of how to use and enhance this application
+This api was built to help find bible verses and search their content. 
+
+## API Documentation
+
+[http://docs.jholmestech.com/bible](http://docs.jholmestec.com/bible)
 
 ## Prequisites
 
@@ -9,5 +13,5 @@ You will need the following things properly installed on your machine:
 * Mongodb
 
 ### Restore DB
-* Production DB data -> mongorestore --dir=src/main/resources/prodDB/ --gzip
-* Test DB data -> mongorestore --dir=src/main/resources/testDB/ --gzip# bible-api
+* `mongorestore --dir=src/main/resources/bible/ --gzip`
+
