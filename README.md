@@ -6,6 +6,10 @@ This api was built to help find bible verses and search their content.
 
 [http://docs.jholmestech.com/bible](http://docs.jholmestec.com/bible)
 
+## Docker Image
+
+## Running Instance
+
 ## Prequisites
 
 You will need the following things properly installed on your machine:
