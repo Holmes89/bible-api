@@ -47,12 +47,18 @@ public class BibleVerseRepository {
 		}
 		
 		List<BibleVerseResource> resources = new ArrayList<BibleVerseResource>();
-		
-		String verse = filterParams.get("displayVerse");
-		String ids = filterParams.get("id");
-		
-		if(verse!=null){
-			resources.addAll(bibleService.getVersesFromString(version, verse));
+			
+		if(filterParams.containsKey("displayVerse")){
+			resources.addAll(bibleService.getVersesFromString(version, filterParams.get("displayVerse")));
+		}
+		else if(filterParams.containsKey("book") && filterParams.containsKey("chapter") && filterParams.containsKey("verse")){
+			
+		}
+		else if(filterParams.containsKey("book") && filterParams.containsKey("chapter")){
+			
+		}
+		else if(filterParams.containsKey("book")){
+			
 		}
 		
 		return resources;
