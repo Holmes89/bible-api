@@ -1,0 +1,38 @@
+language: java
+
+sudo: true
+
+group: edge
+
+services:
+  - docker
+
+cache:
+  directories:
+    - $HOME/.m2
+jdk:
+  - oraclejdk8
+os:
+  - linux
+
+script: mvn clean install
+
+branches:
+  only:
+    - master
+
+deploy:
+  provider: s3
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
+  bucket: "$S3_BUCKET"
+  skip_cleanup: true
+  local_dir: target/generated-docs
+  upload-dir: bible
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
+  - docker build -t holmes89/bible-api .
+  - docker push holmes89/bible-api
+  - mvn clean test jacoco:report coveralls:report

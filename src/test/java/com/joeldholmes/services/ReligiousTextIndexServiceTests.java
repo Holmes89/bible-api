@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ReligiousTextIndexServiceTests {
 	
@@ -61,54 +61,6 @@ public class ReligiousTextIndexServiceTests {
 	@Test(expected=ServiceException.class)
 	public void testMaxBibleBookChapterVerses_invalid_chapter() throws Exception{
 		textIndexService.maxBibleBookChapterVerses("joel", -2);
-	}
-	
-	@Test
-	public void testMaxQuranChapters() throws Exception{
-		Assert.assertEquals(114, textIndexService.maxQuranChapters());
-	}
-	
-	@Test
-	public void testMaxQuranChapterVerses() throws Exception{
-		Assert.assertEquals(286, textIndexService.maxQuranChapterVerses(2));
-		Assert.assertEquals(0, textIndexService.maxQuranChapterVerses(20000));
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testMaxQuranChapterVerses_invalid_chapter() throws Exception{
-		textIndexService.maxQuranChapterVerses(-2);
-	}
-	
-	@Test
-	public void testMaxTaoChapters() throws Exception{
-		Assert.assertEquals(81, textIndexService.maxTaoChapters());
-	}
-	
-	@Test
-	public void testMaxTaoChapterVerses() throws Exception{
-		Assert.assertEquals(4, textIndexService.maxTaoChapterVerses(2));
-		Assert.assertEquals(0, textIndexService.maxTaoChapterVerses(20000));
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testMaxTaoChapterVerses_invalid_chapter() throws Exception{
-		textIndexService.maxTaoChapterVerses(-2);
-	}
-	
-	@Test
-	public void testQuranChapterNameLookup() throws Exception{
-		int chapter = textIndexService.quranChapterNameLookup("The Victory");
-		Assert.assertEquals(48, chapter);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testQuranChapterNameLookup_null() throws Exception{
-		textIndexService.quranChapterNameLookup(null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testQuranChapterNameLookup_empty() throws Exception{
-		textIndexService.quranChapterNameLookup("");
 	}
 
 }

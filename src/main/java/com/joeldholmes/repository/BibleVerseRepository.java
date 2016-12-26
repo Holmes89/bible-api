@@ -33,7 +33,7 @@ public class BibleVerseRepository {
 	}
 	
 	public List<BibleVerseResource> findAll(QueryParams params) throws ServiceException{
-		Map<String, Set<String>> filterParams = QueryParamUtils.getFilters(BibleVerseResource.class, params);
+		Map<String, String> filterParams = QueryParamUtils.getSingleFilters(params);
 		if(filterParams.isEmpty()){
 			return null;
 		}
@@ -43,26 +43,18 @@ public class BibleVerseRepository {
 			version = BibleVersionEnum.NIV;
 		}
 		else{
-			version = BibleVersionEnum.findByAbbreviation(filterParams.get("version").iterator().next());
+			version = BibleVersionEnum.findByAbbreviation(filterParams.get("version"));
 		}
 		
 		List<BibleVerseResource> resources = new ArrayList<BibleVerseResource>();
 		
-		Set<String> verses = filterParams.get("displayVerse");
-		Set<String> ids = filterParams.get("id");
+		String verse = filterParams.get("displayVerse");
+		String ids = filterParams.get("id");
 		
-		if(verses!=null && !verses.isEmpty()){
-			for(String verse: verses){
-				resources.addAll(bibleService.getVersesFromString(version, verse));
-			}
+		if(verse!=null){
+			resources.addAll(bibleService.getVersesFromString(version, verse));
 		}
-		else if(ids!=null && !ids.isEmpty()){
-			List<String> idList = new ArrayList<String>();
-			for(String id : ids){
-				idList.addAll(Arrays.asList(id.split(",")));
-			}
-			resources =  bibleService.getVersesByIds(idList);
-		}
+		
 		return resources;
 	}
 }
