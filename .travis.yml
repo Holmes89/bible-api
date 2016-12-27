@@ -23,19 +23,29 @@ branches:
     - development
 
 deploy:
-  provider: s3
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: "$AWS_SECRET_KEY"
-  bucket: "$S3_BUCKET"
-  skip_cleanup: true
-  local_dir: target/generated-docs
-  upload-dir: bible/development
+  if ([ "$TRAVIS_BRANCH" == "master" ]) 
+    provider: s3
+    access_key_id: "$AWS_ACCESS_KEY"
+    secret_access_key: "$AWS_SECRET_KEY"
+    bucket: "$S3_BUCKET"
+    skip_cleanup: true
+    local_dir: target/generated-docs
+    upload-dir: bible
+  elif ([ "$TRAVIS_BRANCH" == "development" ])
+    provider: s3
+    access_key_id: "$AWS_ACCESS_KEY"
+    secret_access_key: "$AWS_SECRET_KEY"
+    bucket: "$S3_BUCKET"
+    skip_cleanup: true
+    local_dir: target/generated-docs
+    upload-dir: bible/development
+  fi
 
 after_success:
   if ([ "$TRAVIS_BRANCH" == "master" ]) 
-    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    - docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
-    - docker build -t holmes89/bible-api .
-    - docker push holmes89/bible-api
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
+    docker build -t holmes89/bible-api .
+    docker push holmes89/bible-api
   fi
   - mvn clean test jacoco:report coveralls:report
