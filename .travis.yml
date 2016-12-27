@@ -23,23 +23,25 @@ branches:
     - development
 
 deploy:
-  if ([ "$TRAVIS_BRANCH" == "master" ]) 
-    provider: s3
+  - provider: s3
     access_key_id: "$AWS_ACCESS_KEY"
     secret_access_key: "$AWS_SECRET_KEY"
     bucket: "$S3_BUCKET"
     skip_cleanup: true
     local_dir: target/generated-docs
     upload-dir: bible
-  elif ([ "$TRAVIS_BRANCH" == "development" ])
-    provider: s3
+    on:
+      branch: master
+  - provider: s3
     access_key_id: "$AWS_ACCESS_KEY"
     secret_access_key: "$AWS_SECRET_KEY"
     bucket: "$S3_BUCKET"
     skip_cleanup: true
     local_dir: target/generated-docs
     upload-dir: bible/development
-  fi
+    on:
+      branch: development
+ 
 
 after_success:
   if ([ "$TRAVIS_BRANCH" == "master" ]) 
