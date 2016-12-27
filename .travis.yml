@@ -20,6 +20,7 @@ script: mvn clean install
 branches:
   only:
     - master
+    - development
 
 deploy:
   provider: s3
@@ -28,11 +29,13 @@ deploy:
   bucket: "$S3_BUCKET"
   skip_cleanup: true
   local_dir: target/generated-docs
-  upload-dir: bible
+  upload-dir: bible/development
 
 after_success:
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
-  - docker build -t holmes89/bible-api .
-  - docker push holmes89/bible-api
+  if ([ "$TRAVIS_BRANCH" == "master" ]) 
+    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    - docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
+    - docker build -t holmes89/bible-api .
+    - docker push holmes89/bible-api
+  fi
   - mvn clean test jacoco:report coveralls:report
