@@ -44,7 +44,7 @@ deploy:
  
 
 after_success:
-  if ([ "$TRAVIS_BRANCH" == "master" ]) 
+  if ([ "$TRAVIS_BRANCH" == "master" ]); then 
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER .
     docker build -t holmes89/bible-api .
