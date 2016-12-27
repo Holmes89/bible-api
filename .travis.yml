@@ -49,5 +49,5 @@ after_success:
     docker build -t holmes89/bible-api:0.$TRAVIS_BUILD_NUMBER . ;
     docker build -t holmes89/bible-api . ;
     docker push holmes89/bible-api;
-  fi
+    fi
   - mvn clean test jacoco:report coveralls:report
