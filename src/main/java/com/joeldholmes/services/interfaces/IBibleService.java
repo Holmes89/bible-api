@@ -25,4 +25,7 @@ public interface IBibleService {
 	BibleVerseResource getVerseById(String id) throws ServiceException;
 
 	List<BibleVerseResource> getVersesByIds(List<String> id) throws ServiceException;
+
+	List<BibleVerseResource> getVerses(BibleVersionEnum version, String book, String startChapter, String startVerse,
+			String endChapter, String endVerse) throws ServiceException;
 }

@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.resources.SearchTextResource;
+import com.joeldholmes.resources.BibleVerseResource;
 import com.joeldholmes.services.interfaces.ISearchService;
 
 
@@ -23,7 +23,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchBibleText() throws Exception{
-		List<SearchTextResource> results = searchService.searchBibleText("hatred");
+		List<BibleVerseResource> results = searchService.searchBibleText("hatred");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
@@ -32,7 +32,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllBibleText_no_results() throws Exception{
-		List<SearchTextResource> results = searchService.searchBibleText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<BibleVerseResource> results = searchService.searchBibleText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	

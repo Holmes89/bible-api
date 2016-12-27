@@ -7,8 +7,10 @@ This api was built to help find bible verses and search their content.
 [http://docs.jholmestech.com/bible](http://docs.jholmestec.com/bible)
 
 ## Docker Image
+[https://hub.docker.com/r/holmes89/bible-api/](Here)
 
 ## Running Instance
+Currently no running instance
 
 ## Prequisites
 
@@ -17,5 +19,21 @@ You will need the following things properly installed on your machine:
 * Mongodb
 
 ### Restore DB
-* `mongorestore --dir=src/main/resources/bible/ --gzip`
+* `mongorestore --dir=dbs/bible --gzip`
 
+#### Full Bible Versions:
+
+
+#### Light Bible Versions:
+
+* cev
+* nkjv
+* amp
+* beng
+* kjv
+* nlt
+* niv
+* asv
+* nasb
+* nrsv
+* esv
