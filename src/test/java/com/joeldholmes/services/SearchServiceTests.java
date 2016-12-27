@@ -67,7 +67,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllBibleTextWithVersion_no_results() throws Exception{
-		List<BibleVerseResource> results = searchService.searchBibleText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<BibleVerseResource> results = searchService.searchBibleText(BibleVersionEnum.NIV,"asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	

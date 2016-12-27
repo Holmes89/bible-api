@@ -523,6 +523,12 @@ public class BibleServiceTests {
 		Assert.assertNotNull(result.verseContent);
 	}
 	
+	@Test
+	public void testGetVerseFromString_complicatedString() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NLT, "Joel 1:1-4, 2:1-3, Numbers 7-9, Matthew 12:9-14:1");
+		Assert.assertEquals(115, results.size());
+	}
+	
 	@Test(expected=ServiceException.class)
 	public void testGetVerseFromString_null_version() throws Exception{
 		bibleService.getVersesFromString(null, "Joel 2-3:2");
