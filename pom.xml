@@ -143,6 +143,7 @@
 				    <exclude>**/exceptions/**</exclude>
 				    <exclude>**/enums/**</exclude>
 				    <exclude>**/config/**</exclude>
+				    <exclude>**/entity/**</exclude>
 				    <exclude>**/BibleApiApplication.*</exclude>
 				  </excludes>
 				</configuration>

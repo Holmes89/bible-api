@@ -1,7 +1,6 @@
 package com.joeldholmes.services.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +37,13 @@ public class SearchTextService implements ISearchService {
 		for(VerseEntity verseEntity: entities){
 			dtos.add(new BibleVerseResource(verseEntity));
 		}
-		Collections.sort(dtos);
 		return dtos;
 	}
 
 	@Override
 	public List<BibleVerseResource> searchBibleText(BibleVersionEnum version, String term) throws ServiceException {
 		if(version==null){
-			throw new ServiceException("Version cannot be null or empty", ErrorCodes.NULL_INPUT);
+			return searchBibleText(term);
 		}
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);

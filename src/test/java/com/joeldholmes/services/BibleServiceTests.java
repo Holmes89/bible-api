@@ -132,6 +132,22 @@ public class BibleServiceTests {
 	}
 	
 	@Test
+	public void testGetVerse_MultipleChapters2() throws Exception{
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 1, null, 3, null);
+		Assert.assertEquals(73, dtos.size());
+		BibleVerseResource result = dtos.iterator().next();
+		Assert.assertEquals("Joel", result.book);
+		Assert.assertEquals(1, result.chapter);
+		Assert.assertEquals(1, result.verse);
+		Assert.assertNotNull(result.verseContent);
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("Joel", result.book);
+		Assert.assertEquals(3, result.chapter);
+		Assert.assertEquals(21, result.verse);
+		Assert.assertNotNull(result.verseContent);
+	}
+	
+	@Test
 	public void testGetVerse_SingleChapters() throws Exception{
 		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, null, null, null);
 		Assert.assertEquals(32, dtos.size());
@@ -191,6 +207,11 @@ public class BibleServiceTests {
 	@Test(expected=ServiceException.class)
 	public void testGetVerse_nullThroughChapter_invalidVerse() throws Exception{
 		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, null, 99);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_nullThroughChapter_invalidVerse2() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 99, null, 100);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -501,6 +522,37 @@ public class BibleServiceTests {
 		Assert.assertEquals(2, result.verse);
 		Assert.assertNotNull(result.verseContent);
 	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_null_version() throws Exception{
+		bibleService.getVersesFromString(null, "Joel 2-3:2");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_null_String() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.KJV, null);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_empty_string() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.KJV, "");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_invalid_string() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.KJV, "asdfasdfas");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_invalid_string2() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.KJV, "John 1:1:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerseFromString_invalid_string3() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.KJV, "John 1:1, 2:3:1");
+	}
+	
 	
 	
 	@Test
