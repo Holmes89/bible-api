@@ -223,6 +223,62 @@ public class BibleServiceTests {
 	}
 	
 	@Test
+	public void testGetVerse_AllStrings() throws Exception{
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", "2", "3", "3", "3");
+		Assert.assertEquals(33, dtos.size());
+		BibleVerseResource result = dtos.iterator().next();
+		Assert.assertEquals("Joel", result.book);
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.verseContent);
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("Joel", result.book);
+		Assert.assertEquals(3, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.verseContent);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_null_type() throws Exception{
+		bibleService.getVerses(null, "Joel", "2", "3", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_null_book() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, null, "2", "3", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_empty_book() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "", "2", "3", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_null_chapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", null, "3", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_formatError_startChapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", "asdf", "3", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_formatError_startVerse() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", "2", "asdfasd", "3", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_formatError_endChapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", "2", "3", "asdfas", "3");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerse_AllStrings_formatError_endVerse() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", "2", "3", "3", "asdfd");
+	}
+	
+	@Test
 	public void testGetVerseFromString_MultipleVersesSingleChapter() throws Exception{
 		List<BibleVerseResource> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6");
 		Assert.assertEquals(4, dtos.size());

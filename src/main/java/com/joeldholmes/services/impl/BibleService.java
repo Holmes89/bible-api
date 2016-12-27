@@ -61,23 +61,23 @@ public class BibleService implements IBibleService{
 		if(startChapter == null || startChapter.isEmpty()){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null");
 		}
-		Integer startChapterInt, startVerseInt, endChapterInt, endVerseInt = null;
+		Integer startChapterInt = null, startVerseInt = null, endChapterInt= null, endVerseInt = null;
 		
 		try{
-			if(startChapter!=null || !startChapter.isEmpty()){
+			if(startChapter!=null && !startChapter.isEmpty()){
 				startChapterInt = Integer.parseInt(startChapter);
 			}
-			if(startVerse!=null || !startVerse.isEmpty()){
+			if(startVerse!=null && !startVerse.isEmpty()){
 				startVerseInt = Integer.parseInt(startVerse);
 			}
-			if(endChapter!=null || !endChapter.isEmpty()){
+			if(endChapter!=null && !endChapter.isEmpty()){
 				endChapterInt = Integer.parseInt(endChapter);
 			}
-			if(endVerse!=null || !endVerse.isEmpty()){
+			if(endVerse!=null && !endVerse.isEmpty()){
 				endVerseInt = Integer.parseInt(endVerse);
 			}
 			
-			return getVerses(version, book, startChapter, startVerse, endChapter, endVerse);
+			return getVerses(version, book, startChapterInt, startVerseInt, endChapterInt, endVerseInt);
 			
 		}catch(NumberFormatException e){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted Chapter or Verse");
