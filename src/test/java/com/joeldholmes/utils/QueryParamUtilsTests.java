@@ -17,6 +17,9 @@ public class QueryParamUtilsTests {
 	
 	@Test
 	public void testGetSingleFilters(){
+		//Construtor for test coverage
+		QueryParamUtils util = new QueryParamUtils();
+		
 		QueryParams params = createParams("filters[foo]", "bar");
 		Map<String, String> filters = QueryParamUtils.getSingleFilters(params);
 		Assert.assertEquals(1, filters.keySet().size());

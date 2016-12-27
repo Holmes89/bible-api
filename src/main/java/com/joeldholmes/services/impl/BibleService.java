@@ -381,6 +381,10 @@ public class BibleService implements IBibleService{
 	
 	@Override
 	public List<BibleVerseResource> getVersesByIds(List<String> ids) throws ServiceException {
+		if(ids == null){
+			return null;
+		}
+		
 		List<VerseEntity> verseEntities = verseRepository.findAll(ids);
 		if(verseEntities == null){
 			return null;

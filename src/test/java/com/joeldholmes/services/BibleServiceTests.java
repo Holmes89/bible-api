@@ -1,5 +1,7 @@
 package com.joeldholmes.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -500,4 +502,62 @@ public class BibleServiceTests {
 		Assert.assertNotNull(result.verseContent);
 	}
 	
+	
+	@Test
+	public void testGetVerseById() throws Exception{
+		BibleVerseResource resource = bibleService.getVerseById("57a4b3ba213ee841abb55e3e");
+		Assert.assertNotNull(resource);
+		Assert.assertEquals(11, resource.chapter);
+		Assert.assertEquals(BibleVersionEnum.CEV.getAbbr(), resource.version);
+		Assert.assertEquals(28, resource.verse);
+		Assert.assertEquals("Judges", resource.book);
+	}
+	
+	@Test
+	public void testGetVerseById_invalidId() throws Exception{
+		BibleVerseResource resource = bibleService.getVerseById("test");
+		Assert.assertNull(resource);
+	}
+	
+	@Test
+	public void testGetVerseById_nullId() throws Exception{
+		BibleVerseResource resource = bibleService.getVerseById(null);
+		Assert.assertNull(resource);
+		
+	}
+	
+	@Test
+	public void testGetVersesByIds() throws Exception{
+		List<BibleVerseResource> resources = bibleService.getVersesByIds(Collections.singletonList("57a4b3ba213ee841abb55e3e"));
+		Assert.assertNotNull(resources);
+		Assert.assertEquals(1, resources.size());
+		
+		BibleVerseResource resource = resources.get(0);
+		Assert.assertNotNull(resource);
+		Assert.assertEquals(11, resource.chapter);
+		Assert.assertEquals(BibleVersionEnum.CEV.getAbbr(), resource.version);
+		Assert.assertEquals(28, resource.verse);
+		Assert.assertEquals("Judges", resource.book);
+	}
+	
+	@Test
+	public void testGetVersesByIds_invalidId() throws Exception{
+		List<BibleVerseResource> resources = bibleService.getVersesByIds(Collections.singletonList("test"));
+		Assert.assertNotNull(resources);
+		Assert.assertTrue(resources.isEmpty());
+	}
+	
+	@Test
+	public void testGetVersesByIds_empty() throws Exception{
+		List<BibleVerseResource> resources = bibleService.getVersesByIds(new ArrayList<String>());
+		Assert.assertNotNull(resources);
+		Assert.assertTrue(resources.isEmpty());
+	}
+	
+	@Test
+	public void testGetVersesByIds_nullIds() throws Exception{
+		List<BibleVerseResource> resources = bibleService.getVersesByIds(null);
+		Assert.assertNull(resources);
+		
+	}
 }
