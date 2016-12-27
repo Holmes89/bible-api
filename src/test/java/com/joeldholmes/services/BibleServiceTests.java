@@ -25,7 +25,7 @@ public class BibleServiceTests {
 
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		List<BibleVerseResource> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, null, null);
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
 		BibleVerseResource result = dtos.iterator().next();
 		Assert.assertEquals("Joel", result.book);
@@ -36,7 +36,7 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSingleChapter() throws Exception{
-		List<BibleVerseResource> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, null, 6);
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseResource result = dtos.iterator().next();
 		Assert.assertEquals("Joel", result.book);
@@ -52,7 +52,7 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSameChapter() throws Exception{
-		List<BibleVerseResource> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, 2, 6);
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseResource result = dtos.iterator().next();
 		Assert.assertEquals("Joel", result.book);
@@ -68,7 +68,7 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesMultipleChapter() throws Exception{
-		List<BibleVerseResource> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, 3, 3);
+		List<BibleVerseResource> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, 3, 3);
 		Assert.assertEquals(33, dtos.size());
 		BibleVerseResource result = dtos.iterator().next();
 		Assert.assertEquals("Joel", result.book);
@@ -84,52 +84,52 @@ public class BibleServiceTests {
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullType() throws Exception{
-		bibleService.getVersesInRange(null, "Joel", 2, 3, null, null);
+		bibleService.getVerses(null, "Joel", 2, 3, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullBook() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, null, 2, 3, null, null);
+		bibleService.getVerses(BibleVersionEnum.KJV, null, 2, 3, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidBook() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "asdfasdf", 2, 1, null, null);
+		bibleService.getVerses(BibleVersionEnum.KJV, "asdfasdf", 2, 1, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullChapter() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", null, 3, null, null);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", null, 3, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", -1, 2, null, null);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", -1, 2, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullThroughChapter_invalidVerse() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, null, 99);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, null, 99);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullThroughChapter_invalidLowerVerse() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, null, 1);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, null, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidLowerThroughChapter() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, 1, 1);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, 1, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidThroughChapter() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, 99, 1);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, 99, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_throughChapter_invalidVerse() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, 3, -1);
+		bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 2, 3, -1);
 	}
 	
 	@Test

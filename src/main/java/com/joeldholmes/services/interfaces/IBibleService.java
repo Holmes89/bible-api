@@ -8,9 +8,6 @@ import com.joeldholmes.resources.BibleVerseResource;
 
 public interface IBibleService {
 
-	@Deprecated
-	List<BibleVerseResource> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,	Integer throughChapter, Integer throughVerse) throws ServiceException;
-
 	List<BibleVerseResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException;
 
 	List<BibleVerseResource> getVersesFromString(String verses) throws ServiceException;

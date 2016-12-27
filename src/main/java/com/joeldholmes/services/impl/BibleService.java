@@ -360,14 +360,6 @@ public class BibleService implements IBibleService{
 		
 	}
 	
-	@Deprecated
-	@Override
-	public List<BibleVerseResource> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
-			Integer throughChapter, Integer throughVerse) throws ServiceException {
-
-		return getVerses(version, book, chapter, verse, throughChapter, throughVerse);
-	}
-	
 	private List<BibleVerseResource> convertEntitiesToDTOs(List<VerseEntity> entities){
 		List<BibleVerseResource> dtos = new ArrayList<BibleVerseResource>();
 		for(VerseEntity verseEntity: entities){

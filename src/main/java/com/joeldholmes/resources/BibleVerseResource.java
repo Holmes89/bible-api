@@ -25,8 +25,12 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 	
 	public String version;
 
-	public BibleVerseResource(VerseEntity entity){
+	public BibleVerseResource(){
 		super();
+	}
+	
+	public BibleVerseResource(VerseEntity entity){
+		this();
 		String entityBook = entity.getBook();
 		
 		if(entityBook!=null){
@@ -46,7 +50,10 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 	public int compareTo(BibleVerseResource other) {
 		
 		if(!this.book.equals(other.book)){
-			return this.book.compareTo(other.book);
+			if(this.book.compareTo(other.book)<0)
+				return -1;
+			else
+				return 1;
 		}
 		
 		if(this.chapter>other.chapter){
