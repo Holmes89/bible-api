@@ -51,7 +51,27 @@ public class BibleVerseRepository {
 		if(filterParams.containsKey("displayVerse")){
 			resources.addAll(bibleService.getVersesFromString(version, filterParams.get("displayVerse")));
 		}
-		else if(filterParams.containsKey("book") && filterParams.containsKey("chapter") && filterParams.containsKey("verse")){
+		else if(filterParams.containsKey("book")
+				&& filterParams.containsKey("startChapter")
+				&& filterParams.containsKey("endChapter")
+				&& filterParams.containsKey("startVerse")
+				&& filterParams.containsKey("endVerse")){
+			
+		}
+		else if(filterParams.containsKey("book")
+				&& filterParams.containsKey("startChapter")
+				&& filterParams.containsKey("startVerse")
+				&& filterParams.containsKey("endVerse")){
+			
+		}
+		else if(filterParams.containsKey("book")
+				&& filterParams.containsKey("startChapter")
+				&& filterParams.containsKey("endChapter")){
+			
+		}
+		else if(filterParams.containsKey("book") 
+				&& filterParams.containsKey("chapter") 
+				&& filterParams.containsKey("verse")){
 			
 		}
 		else if(filterParams.containsKey("book") && filterParams.containsKey("chapter")){

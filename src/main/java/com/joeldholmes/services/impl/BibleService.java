@@ -49,6 +49,36 @@ public class BibleService implements IBibleService{
 		return dtos;
 	}
 	
+	@Override
+	public List<BibleVerseResource> getVerses(BibleVersionEnum version, String book, String startChapter, String startVerse, String endChapter, String endVerse) throws ServiceException{
+		
+		if(version == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		
+		Integer startChapterInt, startVerseInt, endChapterInt, endVerseInt = null;
+		
+		try{
+			if(startChapter!=null || !startChapter.isEmpty()){
+				startChapterInt = Integer.parseInt(startChapter);
+			}
+			if(startVerse!=null || !startVerse.isEmpty()){
+				startVerseInt = Integer.parseInt(startVerse);
+			}
+			if(endChapter!=null || !endChapter.isEmpty()){
+				endChapterInt = Integer.parseInt(endChapter);
+			}
+			if(endVerse!=null || !endVerse.isEmpty()){
+				endVerseInt = Integer.parseInt(endVerse);
+			}
+		}catch(NumberFormatException e){
+			
+		}
+	}
+	
 	
 	@Override
 	public List<BibleVerseResource> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
