@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joeldholmes.entity.VerseEntity;
+import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
 import com.joeldholmes.resources.BibleVerseResource;
@@ -39,6 +40,21 @@ public class SearchTextService implements ISearchService {
 		}
 		Collections.sort(dtos);
 		return dtos;
+	}
+
+	@Override
+	public List<BibleVerseResource> searchBibleText(BibleVersionEnum version, String term) throws ServiceException {
+		if(version==null){
+			throw new ServiceException("Version cannot be null or empty", ErrorCodes.NULL_INPUT);
+		}
+		if(term==null||term.isEmpty()){
+			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
+		}
+		List<VerseEntity> entities = verseRepository.searchAllBibleTextAndVersion(version.getAbbr(), term);
+		if(entities==null||entities.isEmpty()){
+			return null;
+		}
+		return convertEntitiesToDTOs(entities);
 	}
 
 

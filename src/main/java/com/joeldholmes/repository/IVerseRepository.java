@@ -35,6 +35,9 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	@Query("{$text: {$search: ?0}, \"religiousText\":\"bible\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
 	List<VerseEntity> searchAllBibleText(String term);
 		
+	@Query("{$text: {$search: ?1}, \"religiousText\":\"bible\", \"version\": ?0}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
+	List<VerseEntity> searchAllBibleTextAndVersion(String version, String term);
+		
 	//Find All
 	@Query("{\"_id\": {$in: ?0}}")
 	List<VerseEntity> findAll(List<String> ids);

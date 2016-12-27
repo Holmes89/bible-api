@@ -27,7 +27,7 @@ public class SearchServiceTests {
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
-		Assert.assertEquals(29, results.size());
+		Assert.assertEquals(194, results.size());
 	}
 	
 	@Test

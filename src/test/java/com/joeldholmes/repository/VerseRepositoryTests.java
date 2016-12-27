@@ -57,13 +57,13 @@ public class VerseRepositoryTests {
 		List<VerseEntity> verses = verseRepo.searchAllBibleText("hatred");
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
-		Assert.assertEquals(29, verses.size());
+		Assert.assertEquals(194, verses.size());
 	}
 
 	
 	@Test
 	public void testGetAll() throws Exception{
-		List<VerseEntity> verses = verseRepo.findAll(Arrays.asList("57a4a461a69a6d457a4a87b1", "57a4a45ea69a6d457a4a6ad5"));
+		List<VerseEntity> verses = verseRepo.findAll(Arrays.asList("57a4b3ba213ee841abb55e3d", "57a4b3ba213ee841abb55e3e"));
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
 		Assert.assertEquals(2, verses.size());
