@@ -17,16 +17,16 @@ import com.mongodb.ServerAddress;
 @EnableMongoRepositories
 class MongoDbConfig extends AbstractMongoConfiguration {
 	
-	@Value("${db.name:sacred-texts}")
+	@Value("${db.name:bible-api}")
 	String database;
 	
-	@Value("${db.host:ds031845.mlab.com}")
+	@Value("${db.host:ds145148.mlab.com}")
 	String host;
 	
-	@Value("${db.port:31845}")
+	@Value("${db.port:45148}")
 	Integer port;
 	
-	@Value("${db.username:public}")
+	@Value("${db.username:holmes89}")
 	String userName;
 
 	@Value("${db.password:public}")
