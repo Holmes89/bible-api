@@ -55,10 +55,12 @@ public class BibleService implements IBibleService{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
-		if(book == null){
+		if(book == null || book.isEmpty()){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
 		}
-		
+		if(startChapter == null || startChapter.isEmpty()){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null");
+		}
 		Integer startChapterInt, startVerseInt, endChapterInt, endVerseInt = null;
 		
 		try{
@@ -74,8 +76,11 @@ public class BibleService implements IBibleService{
 			if(endVerse!=null || !endVerse.isEmpty()){
 				endVerseInt = Integer.parseInt(endVerse);
 			}
-		}catch(NumberFormatException e){
 			
+			return getVerses(version, book, startChapter, startVerse, endChapter, endVerse);
+			
+		}catch(NumberFormatException e){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted Chapter or Verse");
 		}
 	}
 	
