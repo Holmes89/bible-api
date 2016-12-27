@@ -141,6 +141,8 @@
 				  <excludes>
 				    <exclude>**/utils/ErrorCodes.*</exclude>
 				    <exclude>**/exceptions/**</exclude>
+				    <exclude>**/enums/**</exclude>
+				    <exclude>**/config/**</exclude>
 				    <exclude>**/BibleApiApplication.*</exclude>
 				  </excludes>
 				</configuration>
