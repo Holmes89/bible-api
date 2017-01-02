@@ -107,5 +107,123 @@ public class BibleServiceTests {
 	public void testGetVersesStrings_numberFormat() throws Exception{
 		bibleService.getVerses(BibleVersionEnum.NIV, "John", "sadf", "1", "2", "2");
 	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_nullVersion() throws Exception{
+		bibleService.getVerses(null, "John", 1, 1, 2, 2);
+	}
+	
+
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_nullBook() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, null, 1, 1, 2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_nullStartChapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", null, 1, 2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidThroughChapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, -2, null);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidThroughChapter2() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 1, -2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidChapter() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", -1, 1, null, null);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidChapter2() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", -1, 1, 2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, -2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse2() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 1, -2, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse3() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, -1, null, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse4() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 5, null, 2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse5() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 5, null, 200);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidThroughVerse() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, 2, -2);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidThroughVerse2() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 1, 2, 200);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_bothInvalidVerse() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 2, 2, 200);
+	}
+
+	@Test
+	public void testGetVerses_sameThroughChapter() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 1, 1, 2);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetVerses_justChapter() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, null, null);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetVerses_throughChapter() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, 2, null);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetVerses_singleVerse() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, null, 2, 2);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetVerses_nullStartVerse() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 2, null, null);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetVerses_range() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 2, 4, 2																																																																																																			);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
 }
 
