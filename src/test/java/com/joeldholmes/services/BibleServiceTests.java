@@ -135,13 +135,19 @@ public class BibleServiceTests {
 	}
 	
 	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidThroughChapter3() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 1, 200, 2);
+	}
+	
+	
+	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter() throws Exception{
 		bibleService.getVerses(BibleVersionEnum.NIV, "John", -1, 1, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter2() throws Exception{
-		bibleService.getVerses(BibleVersionEnum.NIV, "John", -1, 1, 2, 2);
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 20, 1, 22, 2);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -167,6 +173,11 @@ public class BibleServiceTests {
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidVerse5() throws Exception{
 		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 5, null, 200);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVerses_invalidVerse6() throws Exception{
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 500, 2, 501);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -222,6 +233,43 @@ public class BibleServiceTests {
 	@Test
 	public void testGetVerses_range() throws Exception{
 		List<BibleVerseResource> results = bibleService.getVerses(BibleVersionEnum.NIV, "John", 1, 2, 4, 2																																																																																																			);
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_nullVersion() throws Exception{
+		bibleService.getVersesFromString(null, "Joel 1:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_nullVerse() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, null);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1:4:, 2:1-4:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting2() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4:4:4, 2:1-4:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting3() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4:4, 2:1:1-4:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting4() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4:4, 2:1-4:1:2");
+	}
+	
+	@Test
+	public void testGetVersesFromString() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4, 2:1-4:1");
 		Assert.assertNotNull(results);
 		Assert.assertFalse(results.isEmpty());
 	}
