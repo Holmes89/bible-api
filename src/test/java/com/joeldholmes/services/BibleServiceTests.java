@@ -147,7 +147,7 @@ public class BibleServiceTests {
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter2() throws Exception{
-		bibleService.getVerses(BibleVersionEnum.NIV, "John", 20, 1, 22, 2);
+		bibleService.getVerses(BibleVersionEnum.NIV, "John", 200, 1, 220, 2);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -267,9 +267,14 @@ public class BibleServiceTests {
 		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4:4, 2:1-4:1:2");
 	}
 	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting5() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "ASDFASDF");
+	}
+	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4, 2:1-4:1");
+		List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4, 2:1-4:1, 4, Joel 1-4, 2");
 		Assert.assertNotNull(results);
 		Assert.assertFalse(results.isEmpty());
 	}
