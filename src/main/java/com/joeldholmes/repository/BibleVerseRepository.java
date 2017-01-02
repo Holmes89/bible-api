@@ -54,7 +54,7 @@ public class BibleVerseRepository {
 		}
 		else if(filterParams.containsKey("search")){
 			String term = filterParams.get("search");
-			resources.addAll(searchService.searchBibleText(term));
+			resources.addAll(searchService.searchBibleText(version, term));
 		}
 		else if(filterParams.containsKey("book")
 				&& filterParams.containsKey("startChapter")
