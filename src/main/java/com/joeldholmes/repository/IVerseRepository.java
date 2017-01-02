@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.joeldholmes.entity.VerseEntity;
 
-@Repository
+@Repository("verseRepository")
 public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	
 	static final Logger logger = Logger.getLogger(IVerseRepository.class);

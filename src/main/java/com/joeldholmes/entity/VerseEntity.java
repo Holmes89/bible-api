@@ -70,6 +70,10 @@ public class VerseEntity implements Comparable<VerseEntity>{
 		return id;
 	}
 	
+	public void setId(String id){
+		this.id=id;
+	}
+	
 	@Override
 	public int compareTo(VerseEntity other) {
 		if(this.book!=null){
