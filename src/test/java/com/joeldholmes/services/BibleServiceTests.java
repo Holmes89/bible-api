@@ -273,7 +273,37 @@ public class BibleServiceTests {
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVersesFromString_invalidFormatting5() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1, 4:1:2");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting6() throws Exception{
 		bibleService.getVersesFromString(BibleVersionEnum.NIV, "ASDFASDF");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting7() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "4:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting8() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "4-5");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting9() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "4-5:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting10() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "4-5:1:1");
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetVersesFromString_invalidFormatting11() throws Exception{
+		bibleService.getVersesFromString(BibleVersionEnum.NIV, "5:1:1");
 	}
 	
 	@Test
@@ -288,10 +318,13 @@ public class BibleServiceTests {
 				"Joel 1:1,4",
 				"Joel 1:1,2:1",
 				"Joel 1,2:3",
+				"Joel 1,2:3-6",
 				"Joel 1:1-2, 4-8",
 				"Joel 1:1-2, 4:8-10",
 				"Joel 1-5, 6-9",
-				"Joel 1-5,6-8:1"});
+				"Joel 1-5,6-8:1",
+				"Joel 1-5,4:6-8:1"
+				});
 		for(String combo: combinations){
 			System.out.println("Combo: "+combo);
 			List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, combo);
@@ -307,10 +340,37 @@ public class BibleServiceTests {
 		Assert.assertFalse(results.isEmpty());
 	}
 	
+	@Test(expected=ServiceException.class)
+	public void testGetSingleVerse_nullVersion() throws Exception{
+		bibleService.getSingleVerse(null, "Joel", 1, 1);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetSingleVerse_nullBook() throws Exception{
+		bibleService.getSingleVerse(BibleVersionEnum.NIV, null, 1, 1);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetSingleVerse_invalidChapter() throws Exception{
+		bibleService.getSingleVerse(BibleVersionEnum.NIV, "Joel", -1, 1);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetSingleVerse_invalidVerse() throws Exception{
+		bibleService.getSingleVerse(BibleVersionEnum.NIV, "Joel", 1, -1);
+	}
+	
 	@Test
 	public void testGetById() throws Exception{
 		BibleVerseResource result = bibleService.getVerseById("asdf");
 		Assert.assertNotNull(result);
+	}
+	
+	@Test
+	public void testGetById_nullResult() throws Exception{
+		when(verseRepo.getBibleVerseById(Mockito.anyString())).thenReturn(null);
+		BibleVerseResource result = bibleService.getVerseById("asdf");
+		Assert.assertNull(result);
 	}
 	
 	@Test
