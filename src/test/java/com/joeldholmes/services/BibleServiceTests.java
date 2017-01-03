@@ -3,6 +3,8 @@ package com.joeldholmes.services;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -54,6 +56,8 @@ public class BibleServiceTests {
 		when(verseRepo.getBibleVersesInChapter(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(entityList);
 		when(verseRepo.getBibleVersesInChapterRange(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(entityList);
 		when(verseRepo.getSingleBibleVerse(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(entity);
+		when(verseRepo.getBibleVerseById(Mockito.anyString())).thenReturn(entity);
+		when(verseRepo.findAll(Mockito.anyList())).thenReturn(entityList);
 		
 		when(indexService.maxBibleBookChapters(Mockito.anyString())).thenReturn(20);
 		when(indexService.maxBibleBookChapterVerses(Mockito.anyString(), Mockito.anyInt())).thenReturn(20);
@@ -274,9 +278,65 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, "Joel 1:1-4, 2:1-4:1, 4, Joel 1-4, 2");
+		List<String> combinations = Arrays.asList(new String[]{
+				"Joel 1,",
+				"Joel 1:1",
+				"Joel 1:1-2",
+				"Joel 1-2",
+				"Joel 1-2:1",
+				"Joel 1,2",
+				"Joel 1:1,4",
+				"Joel 1:1,2:1",
+				"Joel 1,2:3",
+				"Joel 1:1-2, 4-8",
+				"Joel 1:1-2, 4:8-10",
+				"Joel 1-5, 6-9",
+				"Joel 1-5,6-8:1"});
+		for(String combo: combinations){
+			System.out.println("Combo: "+combo);
+			List<BibleVerseResource> results = bibleService.getVersesFromString(BibleVersionEnum.NIV, combo);
+			Assert.assertNotNull(results);
+			Assert.assertFalse(results.isEmpty());
+		}
+	}
+	
+	@Test
+	public void testGetVersesFromStringNoVersion() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVersesFromString("Joel 1");
 		Assert.assertNotNull(results);
 		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetById() throws Exception{
+		BibleVerseResource result = bibleService.getVerseById("asdf");
+		Assert.assertNotNull(result);
+	}
+	
+	@Test
+	public void testGetById_emptyId() throws Exception{
+		BibleVerseResource result = bibleService.getVerseById(null);
+		Assert.assertNull(result);
+	}
+	
+	@Test
+	public void testGetByIds() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVersesByIds(Collections.singletonList("asdf"));
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	
+	@Test
+	public void testGetByIds_nullId() throws Exception{
+		List<BibleVerseResource> results = bibleService.getVersesByIds(null);
+		Assert.assertNull(results);
+	}
+	
+	@Test
+	public void testGetByIds_nullEntities() throws Exception{
+		when(verseRepo.findAll(Mockito.anyList())).thenReturn(null);
+		List<BibleVerseResource> results = bibleService.getVersesByIds(Collections.singletonList("asdf"));
+		Assert.assertNull(results);
 	}
 }
 

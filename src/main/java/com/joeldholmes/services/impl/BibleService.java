@@ -153,9 +153,6 @@ public class BibleService implements IBibleService{
 				verse=1;
 			}
 			
-			if((chapter < 1) || (chapter > chapterSize)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
-			}
 			if((throughChapter < 1) || (throughChapter > chapterSize)){
 				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
@@ -372,6 +369,9 @@ public class BibleService implements IBibleService{
 
 	@Override
 	public BibleVerseResource getVerseById(String id) throws ServiceException {
+		if(id == null || id.isEmpty()){
+			return null;
+		}
 		VerseEntity verseEntity = verseRepository.getBibleVerseById(id);
 		if(verseEntity == null){
 			return null;
@@ -381,7 +381,7 @@ public class BibleService implements IBibleService{
 	
 	@Override
 	public List<BibleVerseResource> getVersesByIds(List<String> ids) throws ServiceException {
-		if(ids == null){
+		if(ids == null || ids.isEmpty()){
 			return null;
 		}
 		
