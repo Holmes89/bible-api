@@ -21,10 +21,7 @@ You will need the following things properly installed on your machine:
 ### Restore DB
 * `mongorestore --dir=dbs/bible --gzip`
 
-#### Full Bible Versions:
-
-
-#### Light Bible Versions:
+#### Bible Versions:
 
 * cev
 * nkjv
@@ -33,7 +30,11 @@ You will need the following things properly installed on your machine:
 * kjv
 * nlt
 * niv
+* ylt
 * asv
+* msg
+* darby
 * nasb
 * nrsv
 * esv
+

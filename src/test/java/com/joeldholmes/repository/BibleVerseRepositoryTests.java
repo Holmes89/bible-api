@@ -88,9 +88,9 @@ public class BibleVerseRepositoryTests {
 	public void testFindAllBookChapterVerseThroughChapterThroughVerse() throws Exception{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("filter[book]","foo");
-		params.put("filter[startChapter]", "1");
+		params.put("filter[chapter]", "1");
 		params.put("filter[endChapter]", "2");
-		params.put("filter[startVerse]", "1");
+		params.put("filter[verse]", "1");
 		params.put("filter[endVerse]", "1");
 		params.put("filter[version]", "NLT");
 		List<BibleVerseResource> results = repo.findAll(createSingleParams(params));
@@ -102,8 +102,8 @@ public class BibleVerseRepositoryTests {
 	public void testFindAllBookChapterVerseThroughVerse() throws Exception{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("filter[book]","foo");
-		params.put("filter[startChapter]", "1");
-		params.put("filter[startVerse]", "1");
+		params.put("filter[chapter]", "1");
+		params.put("filter[verse]", "1");
 		params.put("filter[endVerse]", "2");
 		params.put("filter[version]", "NLT");
 		List<BibleVerseResource> results = repo.findAll(createSingleParams(params));
@@ -115,7 +115,7 @@ public class BibleVerseRepositoryTests {
 	public void testFindAllBookChapterThroughChapter() throws Exception{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("filter[book]","foo");
-		params.put("filter[startChapter]", "1");
+		params.put("filter[chapter]", "1");
 		params.put("filter[endChapter]", "2");
 		params.put("filter[version]", "NLT");
 		List<BibleVerseResource> results = repo.findAll(createSingleParams(params));

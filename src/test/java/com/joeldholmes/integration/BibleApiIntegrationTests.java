@@ -96,5 +96,35 @@ public class BibleApiIntegrationTests {
     	.statusCode(200)
     	.body("data", hasSize(21));
     }
+    
+    @Test
+    public void testExactVerse(){
+    	given(this.spec)
+    	.queryParam("filter[version]", "nlt")
+    	.queryParam("filter[book]", "Joel")
+    	.queryParam("filter[chapter]", "1")
+    	.queryParam("filter[verse]", "1")
+    	.queryParam("filter[endChapter]", "2")
+    	.queryParam("filter[endVerse]", "3")
+    	.accept("application/vnd.api+json;charset=UTF-8") 
+		.filter(document("exact",
+					preprocessRequest(
+						prettyPrint(), 
+						modifyUris().host("bible.jholmestech.com").port(8080)),
+					preprocessResponse(prettyPrint()),
+					requestParameters( 
+						parameterWithName("filter[version]").description("Bible Version").optional(),
+						parameterWithName("filter[book]").description("Book in Bible"),
+						parameterWithName("filter[chapter]").description("Chapter in book"),
+						parameterWithName("filter[verse]").description("Verse in book").optional(),
+						parameterWithName("filter[endChapter]").description("If Range, End Chapter").optional(),
+						parameterWithName("filter[endVerse]").description("If Range, End Verse").optional()	
+					)) 
+		)
+		.get("/api/verses/").
+    	then()
+    	.statusCode(200)
+    	.body("data", hasSize(23));
+    }
  
 }

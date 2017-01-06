@@ -15,9 +15,20 @@ and will return in appropriate format.
 
 Available formats:
 
-* NIV (default)
-* NLT
-* NRSV
+* niv (default)
+* cev
+* nkjv
+* amp
+* beng
+* kjv
+* nlt
+* ylt
+* asv
+* msg
+* darby
+* nasb
+* nrsv
+* esv
 
 === Formatted Searching
 
@@ -36,3 +47,11 @@ Verses can be found based on a particular word or phrase in the verse.
 include::{snippets}/search/request-parameters.adoc[]
 
 include::{snippets}/search/http-request.adoc[]
+
+=== Exact Searching
+
+Verses can be found based on book, chapter, verse and can end in a specified range. For example: Book Chapter - End Chapter, Book Chapter:Verse, Book Chapter:Verse - End Verse, Book Chapter:Verse - EndChapter:EndVerse.
+
+include::{snippets}/exact/request-parameters.adoc[]
+
+include::{snippets}/exact/http-request.adoc[]

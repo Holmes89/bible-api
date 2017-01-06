@@ -57,39 +57,39 @@ public class BibleVerseRepository {
 			resources.addAll(searchService.searchBibleText(version, term));
 		}
 		else if(filterParams.containsKey("book")
-				&& filterParams.containsKey("startChapter")
+				&& filterParams.containsKey("chapter")
 				&& filterParams.containsKey("endChapter")
-				&& filterParams.containsKey("startVerse")
+				&& filterParams.containsKey("verse")
 				&& filterParams.containsKey("endVerse")){
 			
 			String book = filterParams.get("book");
-			String startChapter = filterParams.get("startChapter");
+			String startChapter = filterParams.get("chapter");
 			String endChapter = filterParams.get("endChapter");
-			String startVerse = filterParams.get("startVerse");
+			String startVerse = filterParams.get("verse");
 			String endVerse = filterParams.get("endVerse");
 			
 			resources.addAll(bibleService.getVerses(version, book, startChapter, startVerse, endChapter, endVerse));
 			
 		}
 		else if(filterParams.containsKey("book")
-				&& filterParams.containsKey("startChapter")
-				&& filterParams.containsKey("startVerse")
+				&& filterParams.containsKey("chapter")
+				&& filterParams.containsKey("verse")
 				&& filterParams.containsKey("endVerse")){
 
 			String book = filterParams.get("book");
-			String startChapter = filterParams.get("startChapter");
-			String startVerse = filterParams.get("startVerse");
+			String startChapter = filterParams.get("chapter");
+			String startVerse = filterParams.get("verse");
 			String endVerse = filterParams.get("endVerse");
 			
 			resources.addAll(bibleService.getVerses(version, book, startChapter, startVerse, null, endVerse));
 			
 		}
 		else if(filterParams.containsKey("book")
-				&& filterParams.containsKey("startChapter")
+				&& filterParams.containsKey("chapter")
 				&& filterParams.containsKey("endChapter")){
 			
 			String book = filterParams.get("book");
-			String startChapter = filterParams.get("startChapter");
+			String startChapter = filterParams.get("chapter");
 			String endChapter = filterParams.get("endChapter");
 			
 			resources.addAll(bibleService.getVerses(version, book, startChapter, null, endChapter, null));
