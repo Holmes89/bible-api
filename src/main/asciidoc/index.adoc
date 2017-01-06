@@ -23,6 +23,8 @@ Available formats:
 
 Verses can be searched on a formatted basis using _displayVerse_:
 
+include::{snippets}/displayVerse/request-parameters.adoc[]
+
 include::{snippets}/displayVerse/http-request.adoc[]
 
 Examples include: Joel 1:1, Joel 1-3, Joel 1:2-3. Combinations will also work: Joel 1:4, Exodus 4-5.
@@ -30,5 +32,7 @@ Examples include: Joel 1:1, Joel 1-3, Joel 1:2-3. Combinations will also work: J
 === Term Searching
 
 Verses can be found based on a particular word or phrase in the verse.
+
+include::{snippets}/search/request-parameters.adoc[]
 
 include::{snippets}/search/http-request.adoc[]
