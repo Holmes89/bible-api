@@ -5,6 +5,8 @@ v0.0.1 Joel Holmes <holmes89@gmail.com>;
 :source-highlighter: highlightjs
 :toc: left
 
+*Current Active Endpoint*: https://bible-verse-api.herokuapp.com
+
 This API is built on the http://jsonapi.org[JSON API] standard. The only function
 available is `GET` with the various filters oulined below.
 
