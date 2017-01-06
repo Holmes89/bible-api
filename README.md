@@ -4,13 +4,13 @@ This api was built to help find bible verses and search their content.
 
 ## API Documentation
 
-[http://docs.jholmestech.com/bible](http://docs.jholmestec.com/bible)
+[http://docs.jholmestech.com/bible](http://docs.jholmestech.com/bible)
 
 ## Docker Image
 [https://hub.docker.com/r/holmes89/bible-api/](Here)
 
 ## Running Instance
-Currently no running instance
+[https://bible-verse-api.herokuapp.com](Here)
 
 ## Prequisites
 
