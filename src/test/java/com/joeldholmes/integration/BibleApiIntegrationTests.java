@@ -88,7 +88,6 @@ public class BibleApiIntegrationTests {
 						modifyUris().host("bible.jholmestech.com").port(8080)),
 					preprocessResponse(prettyPrint()),
 					requestParameters( 
-						parameterWithName("filter[version]").description("Bible Version").optional(),
 						parameterWithName("filter[search]").description("Search term"))) 
 		)
 		.get("/api/verses/").
@@ -113,12 +112,12 @@ public class BibleApiIntegrationTests {
 						modifyUris().host("bible.jholmestech.com").port(8080)),
 					preprocessResponse(prettyPrint()),
 					requestParameters( 
-						parameterWithName("filter[version]").description("Bible Version").optional(),
+						parameterWithName("filter[version]").description("Bible Version"),
 						parameterWithName("filter[book]").description("Book in Bible"),
 						parameterWithName("filter[chapter]").description("Chapter in book"),
-						parameterWithName("filter[verse]").description("Verse in book").optional(),
-						parameterWithName("filter[endChapter]").description("If Range, End Chapter").optional(),
-						parameterWithName("filter[endVerse]").description("If Range, End Verse").optional()	
+						parameterWithName("filter[verse]").description("Verse in book"),
+						parameterWithName("filter[endChapter]").description("If Range, End Chapter"),
+						parameterWithName("filter[endVerse]").description("If Range, End Verse")	
 					)) 
 		)
 		.get("/api/verses/").
