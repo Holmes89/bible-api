@@ -60,6 +60,13 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(194, verses.size());
 	}
 
+	@Test
+	public void testSearchAllBibleTextAndVersion() throws Exception{
+		List<VerseEntity> verses = verseRepo.searchAllBibleTextAndVersion("niv", "Joel");
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(21, verses.size());
+	}
 	
 	@Test
 	public void testGetAll() throws Exception{

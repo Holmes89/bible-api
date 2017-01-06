@@ -4,3 +4,31 @@ v0.0.1 Joel Holmes <holmes89@gmail.com>;
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
+
+This API is built on the http://jsonapi.org[JSON API] standard. The only function
+available is `GET` with the various filters oulined below.
+
+== Filters
+
+A variety of filters are provided for `GET` requests. A _version_ filter is optional on all requests
+and will return in appropriate format.
+
+Available formats:
+
+* NIV (default)
+* NLT
+* NRSV
+
+=== Formatted Searching
+
+Verses can be searched on a formatted basis using _displayVerse_:
+
+include::{snippets}/displayVerse/http-request.adoc[]
+
+Examples include: Joel 1:1, Joel 1-3, Joel 1:2-3. Combinations will also work: Joel 1:4, Exodus 4-5.
+
+=== Term Searching
+
+Verses can be found based on a particular word or phrase in the verse.
+
+include::{snippets}/search/http-request.adoc[]
