@@ -50,4 +50,4 @@ after_success:
     docker build -t holmes89/bible-api . ;
     docker push holmes89/bible-api;
     fi
-  - mvn clean test jacoco:report coveralls:report
+  - mvn test jacoco:report coveralls:report
