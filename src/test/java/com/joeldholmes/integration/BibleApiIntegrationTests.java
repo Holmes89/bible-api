@@ -61,13 +61,7 @@ public class BibleApiIntegrationTests {
     	given(this.spec)
     	.queryParam("filter[displayVerse]", "Joel 1:2")
     	.accept("application/vnd.api+json;charset=UTF-8") 
-    	.filter(document("displayVerse",
-				preprocessRequest(
-					prettyPrint(), 
-					modifyUris().host("bible.jholmestech.com").port(8080)),
-				preprocessResponse(prettyPrint()),
-				requestParameters( 
-					parameterWithName("filter[displayVerse]").description("Find by formatted verse"))))
+    	.filter(document("displayVerse"))
 		.get("/api/verses/").
     	then()
     	.statusCode(200)
@@ -82,13 +76,7 @@ public class BibleApiIntegrationTests {
     	given(this.spec)
     	.queryParam("filter[search]", "Joel")
     	.accept("application/vnd.api+json;charset=UTF-8") 
-		.filter(document("search",
-					preprocessRequest(
-						prettyPrint(), 
-						modifyUris().host("bible.jholmestech.com").port(8080)),
-					preprocessResponse(prettyPrint()),
-					requestParameters( 
-						parameterWithName("filter[search]").description("Search term"))) 
+		.filter(document("search") 
 		)
 		.get("/api/verses/").
     	then()
@@ -106,19 +94,7 @@ public class BibleApiIntegrationTests {
     	.queryParam("filter[endChapter]", "2")
     	.queryParam("filter[endVerse]", "3")
     	.accept("application/vnd.api+json;charset=UTF-8") 
-		.filter(document("exact",
-					preprocessRequest(
-						prettyPrint(), 
-						modifyUris().host("bible.jholmestech.com").port(8080)),
-					preprocessResponse(prettyPrint()),
-					requestParameters( 
-						parameterWithName("filter[version]").description("Bible Version"),
-						parameterWithName("filter[book]").description("Book in Bible"),
-						parameterWithName("filter[chapter]").description("Chapter in book"),
-						parameterWithName("filter[verse]").description("Verse in book"),
-						parameterWithName("filter[endChapter]").description("If Range, End Chapter"),
-						parameterWithName("filter[endVerse]").description("If Range, End Verse")	
-					)) 
+		.filter(document("exact") 
 		)
 		.get("/api/verses/").
     	then()
