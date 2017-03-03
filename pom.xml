@@ -5,7 +5,7 @@
 
 	<groupId>com.joeldholmes</groupId>
 	<artifactId>bible-api</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>BibleAPI</name>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>io.katharsis</groupId>
 			<artifactId>katharsis-spring</artifactId>
-			<version>2.4.2</version>
+			<version>2.8.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>

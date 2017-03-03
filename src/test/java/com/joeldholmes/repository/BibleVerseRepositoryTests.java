@@ -48,6 +48,7 @@ public class BibleVerseRepositoryTests {
 		Mockito.when(bibleService.getVersesByIds(Mockito.anyList())).thenReturn(resourceList);
 		Mockito.when(bibleService.getVersesFromString(Mockito.any(BibleVersionEnum.class), Mockito.anyString())).thenReturn(resourceList);
 		Mockito.when(searchService.searchBibleText(Mockito.any(BibleVersionEnum.class), Mockito.anyString())).thenReturn(resourceList);
+		Mockito.when(searchService.searchBibleText(Mockito.anyString())).thenReturn(resourceList);
 		Mockito.when(bibleService.getVerses(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(resourceList);
 	}
 	
@@ -79,7 +80,16 @@ public class BibleVerseRepositoryTests {
 	
 	@Test
 	public void testFindAllSearch() throws Exception{
-		List<BibleVerseResource> results = repo.findAll(createParams("filter[search]", "Joel 1:1"));
+		List<BibleVerseResource> results = repo.findAll(createParams("filter[verseContent]", "love"));
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
+	}
+	@Test
+	public void testFindAllSearch_withVersion() throws Exception{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("filter[verseContent]","foo");
+		params.put("filter[version]", "NLT");
+		List<BibleVerseResource> results = repo.findAll(createSingleParams(params));
 		Assert.assertNotNull(results);
 		Assert.assertFalse(results.isEmpty());
 	}

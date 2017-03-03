@@ -52,10 +52,6 @@ public class BibleVerseRepository {
 		if(filterParams.containsKey("displayVerse")){
 			resources.addAll(bibleService.getVersesFromString(version, filterParams.get("displayVerse")));
 		}
-		else if(filterParams.containsKey("search")){
-			String term = filterParams.get("search");
-			resources.addAll(searchService.searchBibleText(version, term));
-		}
 		else if(filterParams.containsKey("book")
 				&& filterParams.containsKey("chapter")
 				&& filterParams.containsKey("endChapter")
@@ -113,6 +109,14 @@ public class BibleVerseRepository {
 			
 			resources.addAll(bibleService.getVerses(version, book, chapter, null, null, null));
 
+		}
+		else if(filterParams.containsKey("verseContent") && filterParams.containsKey("version")){
+			String searchTerm = filterParams.get("verseContent");
+			resources.addAll(searchService.searchBibleText(version, searchTerm));
+		}
+		else if(filterParams.containsKey("verseContent")){
+			String searchTerm = filterParams.get("verseContent");
+			resources.addAll(searchService.searchBibleText(searchTerm));
 		}
 		
 		

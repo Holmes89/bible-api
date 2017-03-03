@@ -80,7 +80,8 @@ public class BibleApiIntegrationTests {
     @Test
     public void testSearchVerse(){
     	given(this.spec)
-    	.queryParam("filter[search]", "Joel")
+    	.queryParam("filter[verseContent]", "Joel")
+    	.queryParam("filter[version]", "NIV")
     	.accept("application/vnd.api+json;charset=UTF-8") 
 		.filter(document("search",
 					preprocessRequest(
@@ -89,7 +90,7 @@ public class BibleApiIntegrationTests {
 					preprocessResponse(prettyPrint()),
 					requestParameters( 
 						parameterWithName("filter[version]").description("Bible Version").optional(),
-						parameterWithName("filter[search]").description("Search term"))) 
+						parameterWithName("filter[verseContent]").description("Search term"))) 
 		)
 		.get("/api/verses/").
     	then()
