@@ -74,9 +74,17 @@ public class BibleApiIntegrationTests {
     @Test
     public void testSearchVerse(){
     	given(this.spec)
-    	.queryParam("filter[search]", "Joel")
+    	.queryParam("filter[verseContent]", "Joel")
+    	.queryParam("filter[version]", "NIV")
     	.accept("application/vnd.api+json;charset=UTF-8") 
-		.filter(document("search") 
+		.filter(document("search",
+					preprocessRequest(
+						prettyPrint(), 
+						modifyUris().host("bible.jholmestech.com").port(8080)),
+					preprocessResponse(prettyPrint()),
+					requestParameters( 
+						parameterWithName("filter[version]").description("Bible Version").optional(),
+						parameterWithName("filter[verseContent]").description("Search term"))) 
 		)
 		.get("/api/verses/").
     	then()
