@@ -12,6 +12,7 @@ import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.resources.BibleVerseResource;
 import com.joeldholmes.services.interfaces.IBibleService;
 import com.joeldholmes.services.interfaces.ISearchService;
+import com.joeldholmes.utils.ErrorCodes;
 import com.joeldholmes.utils.QueryParamUtils;
 
 import io.katharsis.queryParams.QueryParams;
@@ -50,7 +51,13 @@ public class BibleVerseRepository {
 		List<BibleVerseResource> resources = new ArrayList<BibleVerseResource>();
 			
 		if(filterParams.containsKey("displayVerse")){
-			resources.addAll(bibleService.getVersesFromString(version, filterParams.get("displayVerse")));
+			try{
+				resources.addAll(bibleService.getVersesFromString(filterParams.get("displayVerse")));
+			}catch(ServiceException e){
+				if(!e.getErrorCode().equalsIgnoreCase(ErrorCodes.INVALID_INPUT)){
+					throw e;
+				}
+			}
 		}
 		else if(filterParams.containsKey("book")
 				&& filterParams.containsKey("chapter")

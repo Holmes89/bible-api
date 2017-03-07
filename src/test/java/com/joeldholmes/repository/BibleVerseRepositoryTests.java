@@ -46,7 +46,7 @@ public class BibleVerseRepositoryTests {
 		
 		Mockito.when(bibleService.getVerseById(Mockito.anyString())).thenReturn(resource);
 		Mockito.when(bibleService.getVersesByIds(Mockito.anyList())).thenReturn(resourceList);
-		Mockito.when(bibleService.getVersesFromString(Mockito.any(BibleVersionEnum.class), Mockito.anyString())).thenReturn(resourceList);
+		Mockito.when(bibleService.getVersesFromString(Mockito.anyString())).thenReturn(resourceList);
 		Mockito.when(searchService.searchBibleText(Mockito.any(BibleVersionEnum.class), Mockito.anyString())).thenReturn(resourceList);
 		Mockito.when(searchService.searchBibleText(Mockito.anyString())).thenReturn(resourceList);
 		Mockito.when(bibleService.getVerses(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(resourceList);
