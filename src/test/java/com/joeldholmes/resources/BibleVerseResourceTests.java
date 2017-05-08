@@ -44,7 +44,6 @@ public class BibleVerseResourceTests {
 
 	private BibleVerseResource getResource(){
 		BibleVerseResource resource = new BibleVerseResource();
-		resource.id="foo";
 		resource.book="joel";
 		resource.chapter=2;
 		resource.verse=1;

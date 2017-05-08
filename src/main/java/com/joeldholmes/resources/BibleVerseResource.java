@@ -11,8 +11,6 @@ import io.katharsis.resource.annotations.JsonApiResource;
 public class BibleVerseResource implements Comparable<BibleVerseResource>{
 
 	@JsonApiId
-	public String id;
-	
 	public String displayVerse;
 	
 	public String book;
@@ -40,7 +38,6 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.verseContent=entity.getContent();
-		this.id = entity.getId();
 		this.version = entity.getVersion();
 		this.displayVerse = this.book+" "+this.chapter+":"+this.verse;
 		

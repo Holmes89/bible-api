@@ -27,6 +27,11 @@ public class BibleService implements IBibleService{
 	@Autowired
 	IReligiousTextIndexService indexService;
 	
+	private final String FULL_REGEX = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
+	private final String CHAPTER_VERSE_REGEX = "([\\d:]+)-?([\\d:]+)?";
+	private final static String ID_REGEX = "(\\d?\\s?\\w+)\\s(\\d+):(\\d+)\\s\\[([A-Z]+)\\]";
+	
+	private final static Pattern ID_PATTERN = Pattern.compile(ID_REGEX);
 	@Override
 	public List<BibleVerseResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
 		if(version == null){
@@ -192,11 +197,8 @@ public class BibleService implements IBibleService{
 		verses = verses.replaceAll("\\s+", " ");
 		List<BibleVerseResource> verseList = new ArrayList<BibleVerseResource>();
 		
-		String fullRegex = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
-		String chapterVerseRegex = "([\\d:]+)-?([\\d:]+)?";
-		
-		Pattern fullRegexPattern = Pattern.compile(fullRegex);
-		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
+		Pattern fullRegexPattern = Pattern.compile(FULL_REGEX);
+		Pattern chapterVersePattern =Pattern.compile(CHAPTER_VERSE_REGEX);
 		
 		String book = null;
 		Integer startChapter = null;
@@ -236,7 +238,7 @@ public class BibleService implements IBibleService{
 					}
 				}
 			}
-			else if(verse.matches(chapterVerseRegex)){
+			else if(verse.matches(CHAPTER_VERSE_REGEX)){
 				m = chapterVersePattern.matcher(verse);
 				if(m.matches()){
 					String[] nextCv = m.group(1).split(":");
@@ -369,32 +371,43 @@ public class BibleService implements IBibleService{
 
 	@Override
 	public BibleVerseResource getVerseById(String id) throws ServiceException {
-		if(id == null || id.isEmpty()){
+		if(id == null || id.trim().isEmpty()){
 			return null;
 		}
-		VerseEntity verseEntity = verseRepository.getBibleVerseById(id);
-		if(verseEntity == null){
-			return null;
+		id = id.trim();
+		
+		Matcher matcher = ID_PATTERN.matcher(id);
+		if(matcher.matches()){
+			String book = matcher.group(1).trim();
+			Integer chapter = Integer.parseInt(matcher.group(2));
+			Integer verse = Integer.parseInt(matcher.group(3));
+			String versionString = matcher.group(4);
+			BibleVersionEnum version = BibleVersionEnum.findByAbbreviation(versionString);
+			if(version == null){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Invalid Bible Version");
+			}
+			return getSingleVerse(version, book, chapter, verse);
 		}
-		return new BibleVerseResource(verseEntity);
+		else{
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Invalid Bible Verse Id");
+		}
+		
+		
 	}
 	
 	@Override
-	public List<BibleVerseResource> getVersesByIds(List<String> ids) throws ServiceException {
-		if(ids == null || ids.isEmpty()){
+	public List<BibleVerseResource> getVersesByIds(Iterable<String> ids) throws ServiceException {
+		if(ids == null){
 			return null;
 		}
 		
-		List<VerseEntity> verseEntities = verseRepository.findAll(ids);
-		if(verseEntities == null){
-			return null;
-		}
 		List<BibleVerseResource> results = new ArrayList<BibleVerseResource>();
-		for(VerseEntity verse : verseEntities){
-			results.add(new BibleVerseResource(verse));
+		for(String id : ids){
+			results.add(getVerseById(id));
 		}
 		return results;
 	}
+	
 
 
 }

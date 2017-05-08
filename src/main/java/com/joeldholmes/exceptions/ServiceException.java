@@ -1,6 +1,6 @@
 package com.joeldholmes.exceptions;
 
-public class ServiceException extends Exception {
+public class ServiceException extends APIException {
 	
 	private static final long serialVersionUID = 1L;
 	private String errorCode;

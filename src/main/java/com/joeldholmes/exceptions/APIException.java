@@ -1,6 +1,6 @@
 package com.joeldholmes.exceptions;
 
-public class APIException extends Exception {
+public class APIException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	private String errorCode;
