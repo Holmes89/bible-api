@@ -77,6 +77,24 @@ public class BibleApiIntegrationTests {
     	.body("data.attributes.version", equalTo("nlt"));
     	
     }
+    
+    @Test
+    public void testByAllByIds(){
+    	given(this.spec)
+    	.get("/api/verses/1 Peter 1:3 NLT,Joel 2:5 NIV")
+    	.then()
+    	.statusCode(200)
+    	.body("data", hasSize(2))
+    	.body("data[0].attributes.book", equalTo("1 Peter"))
+    	.body("data[0].attributes.chapter", equalTo(1))
+    	.body("data[0].attributes.verse", equalTo(3))
+    	.body("data[0].attributes.version", equalTo("nlt"))
+    	.body("data[1].attributes.book", equalTo("Joel"))
+    	.body("data[1].attributes.chapter", equalTo(2))
+    	.body("data[1].attributes.verse", equalTo(5))
+    	.body("data[1].attributes.version", equalTo("niv"));
+    }
+    
 //    
 //    @Test
 //    public void testDisplayVerse(){
