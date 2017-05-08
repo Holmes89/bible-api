@@ -47,6 +47,7 @@ public class BibleVerseResourceController extends ResourceRepositoryBase<BibleVe
 	
 	@HystrixCommand(commandKey="BibleVerseFindAll", groupKey="BibleVerse", threadPoolKey="BibleVerse")
 	public ResourceList<BibleVerseResource> findAll(QuerySpec querySpec) {
+		
 		return querySpec.apply(bibleRepository.findAll(querySpec));
 	}
 }

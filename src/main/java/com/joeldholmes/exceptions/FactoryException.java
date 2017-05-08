@@ -1,6 +1,6 @@
 package com.joeldholmes.exceptions;
 
-public class FactoryException extends Exception {
+public class FactoryException extends APIException {
 
 	private static final long serialVersionUID = 1L;
 	private String errorCode;
