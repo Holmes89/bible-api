@@ -1,5 +1,7 @@
 package com.joeldholmes.services.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,9 +31,12 @@ public class BibleService implements IBibleService{
 	
 	private final String FULL_REGEX = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
 	private final String CHAPTER_VERSE_REGEX = "([\\d:]+)-?([\\d:]+)?";
-	private final static String ID_REGEX = "(\\d?\\s?\\w+)\\s(\\d+):(\\d+)\\s\\[([A-Z]+)\\]";
+	private final static String ID_REGEX = "(\\d?\\s?\\w+)\\s(\\d+):(\\d+)\\s([A-Z]+)";
 	
 	private final static Pattern ID_PATTERN = Pattern.compile(ID_REGEX);
+
+	private static final String DEFAULT_ENC = "UTF-8";
+	
 	@Override
 	public List<BibleVerseResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
 		if(version == null){
@@ -375,6 +380,11 @@ public class BibleService implements IBibleService{
 			return null;
 		}
 		id = id.trim();
+		try {
+			id = URLDecoder.decode(id, DEFAULT_ENC);
+		} catch (UnsupportedEncodingException e) {
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Unexpected encoding error");
+		}
 		
 		Matcher matcher = ID_PATTERN.matcher(id);
 		if(matcher.matches()){

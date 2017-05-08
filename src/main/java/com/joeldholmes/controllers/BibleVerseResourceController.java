@@ -1,5 +1,8 @@
 package com.joeldholmes.controllers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +11,7 @@ import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.BibleVerseRepository;
 import com.joeldholmes.resources.BibleVerseResource;
 import com.joeldholmes.services.interfaces.IBibleService;
+import com.joeldholmes.utils.ErrorCodes;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import io.katharsis.queryspec.QuerySpec;
@@ -17,7 +21,6 @@ import io.katharsis.repository.annotations.JsonApiFindOne;
 import io.katharsis.resource.list.ResourceList;
 
 @Component
-@RestController
 public class BibleVerseResourceController extends ResourceRepositoryBase<BibleVerseResource, String> {
 
 	@Autowired

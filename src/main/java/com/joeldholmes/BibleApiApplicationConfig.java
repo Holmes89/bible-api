@@ -1,17 +1,15 @@
 package com.joeldholmes;
 
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
-import io.katharsis.spring.boot.KatharsisConfigV2;
+import io.katharsis.spring.boot.v3.KatharsisConfigV3;
 
 @Configuration
-@Import(KatharsisConfigV2.class)
+@Import(value={KatharsisConfigV3.class})
+@ComponentScan(basePackages={"com.joeldholmes.controllers", "com.joeldholmes.repository", "com.joeldholmes.services"})
 public class BibleApiApplicationConfig {
 	
 }

@@ -38,21 +38,18 @@ public class BibleApiIntegrationTests {
 	
 
 	protected RestDocumentationFilter documentationFilter = document("{ClassName}/{methodName}",
-			preprocessRequest(removeHeaders("Authorization"), prettyPrint()),
 			preprocessResponse(prettyPrint()));
 
 	@LocalServerPort
 	int port;
-	
-	@Autowired
-	ResourceRegistry registry;
 	
 	private RequestSpecification spec;
 
     @Before
     public final void before() {
     	RestAssured.port = port;
-		
+    	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    	
 		this.spec = new RequestSpecBuilder()
 				.addFilter(documentationConfiguration(this.restDocumentation))
 				.addFilter(documentationFilter)
@@ -64,22 +61,20 @@ public class BibleApiIntegrationTests {
     @Test
     public void testConnection(){
     	given(this.spec)
-    	.accept("application/vnd.api+json;charset=UTF-8")
 		.get("/resourcesInfo").then().statusCode(200);
     }
     
     @Test
     public void testById(){
     	given(this.spec)
-    	.accept("application/vnd.api+json;charset=UTF-8")
-    	.pathParam("id", "1 Peter 1:3 [NLT]")
+    	.pathParam("id", "1 Peter 1:3 NLT")
     	.get("/api/verses/{id}")
     	.then()
     	.statusCode(200)
     	.body("data.attributes.book", equalTo("1 Peter"))
-    	.body("data.attributes.chapter", equalTo("1"))
-    	.body("data.attributes.verse", equalTo("3"))
-    	.body("data.attributes.version", equalTo("NLT"));
+    	.body("data.attributes.chapter", equalTo(1))
+    	.body("data.attributes.verse", equalTo(3))
+    	.body("data.attributes.version", equalTo("nlt"));
     	
     }
 //    

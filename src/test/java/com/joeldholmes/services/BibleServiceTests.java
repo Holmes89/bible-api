@@ -362,15 +362,8 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetById() throws Exception{
-		BibleVerseResource result = bibleService.getVerseById("asdf");
+		BibleVerseResource result = bibleService.getVerseById("1 Peter 1:3 NLT");
 		Assert.assertNotNull(result);
-	}
-	
-	@Test
-	public void testGetById_nullResult() throws Exception{
-		when(verseRepo.getBibleVerseById(Mockito.anyString())).thenReturn(null);
-		BibleVerseResource result = bibleService.getVerseById("asdf");
-		Assert.assertNull(result);
 	}
 	
 	@Test
@@ -381,7 +374,7 @@ public class BibleServiceTests {
 	
 	@Test
 	public void testGetByIds() throws Exception{
-		List<BibleVerseResource> results = bibleService.getVersesByIds(Collections.singletonList("asdf"));
+		List<BibleVerseResource> results = bibleService.getVersesByIds(Collections.singletonList("1 Peter 1:3 NLT"));
 		Assert.assertNotNull(results);
 		Assert.assertFalse(results.isEmpty());
 	}
@@ -392,11 +385,5 @@ public class BibleServiceTests {
 		Assert.assertNull(results);
 	}
 	
-	@Test
-	public void testGetByIds_nullEntities() throws Exception{
-		when(verseRepo.findAll(Mockito.anyList())).thenReturn(null);
-		List<BibleVerseResource> results = bibleService.getVersesByIds(Collections.singletonList("asdf"));
-		Assert.assertNull(results);
-	}
 }
 

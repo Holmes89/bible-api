@@ -32,11 +32,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 		</dependency>
@@ -222,15 +217,15 @@
 		  <phase>test</phase>
 		  <goals>
 		    <goal>copy-resources</goal>
-						</goals>
-						<configuration>
-						  <outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
-						  <resources>
-						    <resource>
-						      <directory>${project.build.directory}/generated-docs</directory>
-						    </resource>
-						  </resources>
-						</configuration>
+		  </goals>
+		  <configuration>
+		    <outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
+		    <resources>
+		      <resource>
+			<directory>${project.build.directory}/generated-docs</directory>
+		      </resource>
+		    </resources>
+		  </configuration>
 		</execution>
 	      </executions>
 	    </plugin>
