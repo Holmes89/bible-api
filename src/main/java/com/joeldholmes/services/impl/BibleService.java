@@ -29,13 +29,25 @@ public class BibleService implements IBibleService{
 	@Autowired
 	IReligiousTextIndexService indexService;
 	
-	private final String FULL_REGEX = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
-	private final String CHAPTER_VERSE_REGEX = "([\\d:]+)-?([\\d:]+)?";
+	private final static String FULL_REGEX = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
+	private final static String CHAPTER_VERSE_REGEX = "([\\d:]+)-?([\\d:]+)?";
 	private final static String ID_REGEX = "(\\d?\\s?\\w+)\\s(\\d+):(\\d+)\\s([A-Z]+)";
 	
 	private final static Pattern ID_PATTERN = Pattern.compile(ID_REGEX);
+	private final static Pattern FULL_REGEX_PATTERN = Pattern.compile(FULL_REGEX);
+	private final static Pattern CHAPTER_VERSE_PATTERN = Pattern.compile(CHAPTER_VERSE_REGEX);
 
 	private static final String DEFAULT_ENC = "UTF-8";
+	
+	@Override
+	public boolean isValidVerse(String verseString){
+		if(verseString == null || verseString.isEmpty()){
+			return false;
+		}
+		verseString = decode(verseString);
+		Matcher matcher = FULL_REGEX_PATTERN.matcher(verseString);
+		return matcher.matches();
+	}
 	
 	@Override
 	public List<BibleVerseResource> getVersesInBook(BibleVersionEnum version, String book) throws ServiceException{
@@ -209,17 +221,14 @@ public class BibleService implements IBibleService{
 	@Override
 	public List<BibleVerseResource> getVersesFromString(BibleVersionEnum version, String verses) throws ServiceException{
 		if(version == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+			version = BibleVersionEnum.NIV;
 		}
 		if(verses == null || verses.isEmpty()){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
 		}
-		
+		verses = decode(verses);
 		verses = verses.replaceAll("\\s+", " ");
 		List<BibleVerseResource> verseList = new ArrayList<BibleVerseResource>();
-		
-		Pattern fullRegexPattern = Pattern.compile(FULL_REGEX);
-		Pattern chapterVersePattern =Pattern.compile(CHAPTER_VERSE_REGEX);
 		
 		String book = null;
 		Integer startChapter = null;
@@ -230,7 +239,7 @@ public class BibleService implements IBibleService{
 		String[] verseArray = verses.trim().split(",");
 		for(String verse: verseArray){
 			verse = verse.trim();
-			Matcher m = fullRegexPattern.matcher(verse);	
+			Matcher m = FULL_REGEX_PATTERN.matcher(verse);	
 			if(m.matches()){
 				book = m.group(1);
 				String[] cv = m.group(2).split(":");
@@ -260,7 +269,7 @@ public class BibleService implements IBibleService{
 				}
 			}
 			else if(verse.matches(CHAPTER_VERSE_REGEX)){
-				m = chapterVersePattern.matcher(verse);
+				m = CHAPTER_VERSE_PATTERN.matcher(verse);
 				if(m.matches()){
 					String[] nextCv = m.group(1).split(":");
 					if(startVerse!=null){
@@ -434,6 +443,13 @@ public class BibleService implements IBibleService{
 		return results;
 	}
 	
+	private String decode(String encoded) throws ServiceException{
+		try {
+			return URLDecoder.decode(encoded, DEFAULT_ENC);
+		} catch (UnsupportedEncodingException e) {
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Unexpected encoding error");
+		}
+	}
 
 
 }

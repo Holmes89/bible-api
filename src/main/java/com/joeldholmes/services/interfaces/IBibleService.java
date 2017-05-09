@@ -28,4 +28,6 @@ public interface IBibleService {
 
 	List<BibleVerseResource> getVersesInBook(BibleVersionEnum version, String book) throws ServiceException;
 
+	boolean isValidVerse(String verseString);
+
 }
