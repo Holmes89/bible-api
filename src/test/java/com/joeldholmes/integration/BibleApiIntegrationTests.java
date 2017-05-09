@@ -95,47 +95,30 @@ public class BibleApiIntegrationTests {
     	.body("data[1].attributes.version", equalTo("niv"));
     }
     
-//    
-//    @Test
-//    public void testDisplayVerse(){
-//    	given(this.spec)
-//    	.queryParam("filter[displayVerse]", "Joel 1:2")
-//    	.accept("application/vnd.api+json;charset=UTF-8") 
-//		.get("/api/verses/").
-//    	then()
-//    	.statusCode(200)
-//    	.body("data", hasSize(1))
-//    	.body("data[0].attributes.book", equalTo("Joel"))
-//    	.body("data[0].attributes.chapter", equalTo(1))
-//    	.body("data[0].attributes.verse", equalTo(2));
-//    }
-//    
-//    @Test
-//    public void testSearchVerse(){
-//    	given(this.spec)
-//    	.queryParam("filter[verseContent]", "Joel")
-//    	.queryParam("filter[version]", "NIV")
-//    	.accept("application/vnd.api+json;charset=UTF-8") 
-//		.get("/api/verses/").
-//    	then()
-//    	.statusCode(200)
-//    	.body("data", hasSize(21));
-//    }
-//    
-//    @Test
-//    public void testExactVerse(){
-//    	given(this.spec)
-//    	.queryParam("filter[version]", "nlt")
-//    	.queryParam("filter[book]", "Joel")
-//    	.queryParam("filter[chapter]", "1")
-//    	.queryParam("filter[verse]", "1")
-//    	.queryParam("filter[endChapter]", "2")
-//    	.queryParam("filter[endVerse]", "3")
-//    	.accept("application/vnd.api+json;charset=UTF-8") 
-//		.get("/api/verses/").
-//    	then()
-//    	.statusCode(200)
-//    	.body("data", hasSize(1));
-//    }
-// 
+    @Test
+    public void testByAll(){
+    	given(this.spec)
+    	.get("/api/verses/?filter[book]=Joel")
+    	.then()
+    	.statusCode(200)
+    	.body("data", hasSize(73))
+    	.body("data[0].attributes.book", equalTo("Joel"))
+    	.body("data[0].attributes.chapter", equalTo(1))
+    	.body("data[0].attributes.verse", equalTo(1))
+    	.body("data[0].attributes.version", equalTo("niv"));
+    }
+    
+    @Test
+    public void testByAllWithVersion(){
+    	given(this.spec)
+    	.get("/api/verses/?filter[book]=Joel&filter[version]=nlt")
+    	.then()
+    	.statusCode(200)
+    	.body("data", hasSize(73))
+    	.body("data[0].attributes.book", equalTo("Joel"))
+    	.body("data[0].attributes.chapter", equalTo(1))
+    	.body("data[0].attributes.verse", equalTo(1))
+    	.body("data[0].attributes.version", equalTo("nlt"));
+    }
+    
 }

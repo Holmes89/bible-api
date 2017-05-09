@@ -38,6 +38,22 @@ public class BibleService implements IBibleService{
 	private static final String DEFAULT_ENC = "UTF-8";
 	
 	@Override
+	public List<BibleVerseResource> getVersesInBook(BibleVersionEnum version, String book) throws ServiceException{
+		if(version == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		book = book.toLowerCase().trim();
+		List<BibleVerseResource> dtos = new ArrayList<BibleVerseResource>();
+		
+		List<VerseEntity> entities = verseRepository.getBibleVersesInBook(version.getAbbr(), book.toLowerCase());
+		dtos.addAll(convertEntitiesToDTOs(entities));
+		return dtos;
+	}
+	
+	@Override
 	public List<BibleVerseResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
