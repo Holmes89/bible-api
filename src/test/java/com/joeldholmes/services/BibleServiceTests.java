@@ -241,9 +241,11 @@ public class BibleServiceTests {
 		Assert.assertFalse(results.isEmpty());
 	}
 	
-	@Test(expected=ServiceException.class)
+	@Test
 	public void testGetVersesFromString_nullVersion() throws Exception{
-		bibleService.getVersesFromString(null, "Joel 1:1");
+		List<BibleVerseResource> results = bibleService.getVersesFromString(null, "Joel 1:1");
+		Assert.assertNotNull(results);
+		Assert.assertFalse(results.isEmpty());
 	}
 	
 	@Test(expected=ServiceException.class)

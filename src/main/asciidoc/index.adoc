@@ -10,10 +10,8 @@ v0.0.1 Joel Holmes <holmes89@gmail.com>;
 This API is built on the http://jsonapi.org[JSON API] standard. The only function
 available is `GET` with the various filters oulined below.
 
-== Filters
-
-A variety of filters are provided for `GET` requests. A _version_ filter is optional on all requests
-and will return in appropriate format.
+[[Formats]]
+= Formats
 
 Available formats:
 
@@ -32,25 +30,56 @@ Available formats:
 * nrsv
 * esv
 
-=== Formatted Searching
+[[Verse]]
+= Verses
 
-Verses can be searched on a formatted basis using _displayVerse_:
+Find Bible Verses
+
+[[FindVerseById]]
+=== Find Verse
+
+Find verse where the id is of the format `Peter 1:3 NLT`
+
+===== Example request
+
+include::{snippets}/BibleApiIntegrationTests/testById/http-request.adoc[]
+
+===== Example response
+
+include::{snippets}/BibleApiIntegrationTests/testById/http-response.adoc[]
+
+[[FindVerseMultiple]]
+=== Find Multiple Verses
+
+Find verses where the id is of the format `Peter 1:3 NLT`
+
+===== Example request
+
+include::{snippets}/BibleApiIntegrationTests/testByAllByIds/http-request.adoc[]
+
+===== Example response
+
+include::{snippets}/BibleApiIntegrationTests/testByAllByIds/http-response.adoc[]
+
+[[FindVerseAll]]
+=== Find All Verses
+
+Find all verses with filters
+
+===== Example request
+
+include::{snippets}/BibleApiIntegrationTests/testByAll/http-request.adoc[]
+
+===== Example response
+
+include::{snippets}/BibleApiIntegrationTests/testByAll/http-response.adoc[]
+
+===== Example request with version
+
+include::{snippets}/BibleApiIntegrationTests/testByAllWithVersion/http-request.adoc[]
+
+===== Example response
+
+include::{snippets}/BibleApiIntegrationTests/testByAllWithVersion/http-response.adoc[]
 
 
-include::{snippets}/displayVerse/http-request.adoc[]
-
-Examples include: Joel 1:1, Joel 1-3, Joel 1:2-3. Combinations will also work: Joel 1:4, Exodus 4-5.
-
-=== Term Searching
-
-Verses can be found based on a particular word or phrase in the verse.
-
-
-include::{snippets}/search/http-request.adoc[]
-
-=== Exact Searching
-
-Verses can be found based on book, chapter, verse and can end in a specified range. For example: Book Chapter - End Chapter, Book Chapter:Verse, Book Chapter:Verse - End Verse, Book Chapter:Verse - EndChapter:EndVerse.
-
-
-include::{snippets}/exact/http-request.adoc[]

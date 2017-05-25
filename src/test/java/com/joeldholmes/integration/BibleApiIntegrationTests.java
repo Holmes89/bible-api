@@ -98,10 +98,10 @@ public class BibleApiIntegrationTests {
     @Test
     public void testByAll(){
     	given(this.spec)
-    	.get("/api/verses/?filter[book]=Joel")
+    	.get("/api/verses/?filter[book]=Joel&page[offset]=0&page[limit]=5")
     	.then()
     	.statusCode(200)
-    	.body("data", hasSize(73))
+    	.body("data", hasSize(5))
     	.body("data[0].attributes.book", equalTo("Joel"))
     	.body("data[0].attributes.chapter", equalTo(1))
     	.body("data[0].attributes.verse", equalTo(1))
@@ -111,10 +111,10 @@ public class BibleApiIntegrationTests {
     @Test
     public void testByAllWithVersion(){
     	given(this.spec)
-    	.get("/api/verses/?filter[book]=Joel&filter[version]=nlt")
+    	.get("/api/verses/?filter[book]=Joel&filter[version]=nlt&page[offset]=0&page[limit]=5")
     	.then()
     	.statusCode(200)
-    	.body("data", hasSize(73))
+    	.body("data", hasSize(5))
     	.body("data[0].attributes.book", equalTo("Joel"))
     	.body("data[0].attributes.chapter", equalTo(1))
     	.body("data[0].attributes.verse", equalTo(1))
